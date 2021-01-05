@@ -1,0 +1,16 @@
+{
+  "name": "quinluong/miczone-thrift-php",
+  "type": "library",
+  "description": "Miczone thrift for php",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.2",
+    "apache/thrift": "0.9.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Miczone\\": "src/Miczone/"
+    }
+  }
+}
