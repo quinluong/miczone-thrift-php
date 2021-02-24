@@ -18,6 +18,18 @@ interface MiczoneCatalogGatewayServiceIf {
    * @return \Miczone\Thrift\Catalog\SearchProductResponse
    */
   public function searchProduct(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\SearchProductRequest $request);
+  /**
+   * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+   * @param \Miczone\Thrift\Catalog\GetCategoryByIdRequest $request
+   * @return \Miczone\Thrift\Catalog\GetCategoryByIdResponse
+   */
+  public function getCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\GetCategoryByIdRequest $request);
+  /**
+   * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+   * @param \Miczone\Thrift\Catalog\GetCategoryBySlugRequest $request
+   * @return \Miczone\Thrift\Catalog\GetCategoryBySlugResponse
+   */
+  public function getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\GetCategoryBySlugRequest $request);
 }
 
 class MiczoneCatalogGatewayServiceClient implements \Miczone\Thrift\Catalog\MiczoneCatalogGatewayServiceIf {
@@ -121,6 +133,100 @@ class MiczoneCatalogGatewayServiceClient implements \Miczone\Thrift\Catalog\Micz
       return $result->success;
     }
     throw new \Exception("searchProduct failed: unknown result");
+  }
+
+  public function getCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\GetCategoryByIdRequest $request) {
+    $this->send_getCategoryById($operationHandle, $request);
+
+    return $this->recv_getCategoryById();
+  }
+
+  public function send_getCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\GetCategoryByIdRequest $request) {
+    $args = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryById_args();
+    $args->operationHandle = $operationHandle;
+    $args->request = $request;
+    $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel) {
+      thrift_protocol_write_binary($this->output_, 'getCategoryById', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    } else {
+      $this->output_->writeMessageBegin('getCategoryById', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_getCategoryById() {
+    $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) {
+      $result = thrift_protocol_read_binary($this->input_, '\Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryById_result', $this->input_->isStrictRead());
+    } else {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryById_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new \Exception("getCategoryById failed: unknown result");
+  }
+
+  public function getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\GetCategoryBySlugRequest $request) {
+    $this->send_getCategoryBySlug($operationHandle, $request);
+
+    return $this->recv_getCategoryBySlug();
+  }
+
+  public function send_getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\GetCategoryBySlugRequest $request) {
+    $args = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryBySlug_args();
+    $args->operationHandle = $operationHandle;
+    $args->request = $request;
+    $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel) {
+      thrift_protocol_write_binary($this->output_, 'getCategoryBySlug', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    } else {
+      $this->output_->writeMessageBegin('getCategoryBySlug', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_getCategoryBySlug() {
+    $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) {
+      $result = thrift_protocol_read_binary($this->input_, '\Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryBySlug_result', $this->input_->isStrictRead());
+    } else {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryBySlug_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new \Exception("getCategoryBySlug failed: unknown result");
   }
 
 }
@@ -419,6 +525,378 @@ class MiczoneCatalogGatewayService_searchProduct_result {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('MiczoneCatalogGatewayService_searchProduct_result');
+    if ($this->success !== null) {
+      if (!is_object($this->success)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
+      $xfer += $this->success->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+
+    return $xfer;
+  }
+
+}
+
+class MiczoneCatalogGatewayService_getCategoryById_args {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Common\OperationHandle
+   */
+  public $operationHandle = null;
+  /**
+   * @var \Miczone\Thrift\Catalog\GetCategoryByIdRequest
+   */
+  public $request = null;
+
+  public function __construct($vals = null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'operationHandle',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Common\OperationHandle',
+        ),
+        2 => array(
+          'var' => 'request',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\GetCategoryByIdRequest',
+        ),
+      );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['operationHandle'])) {
+        $this->operationHandle = $vals['operationHandle'];
+      }
+      if (isset($vals['request'])) {
+        $this->request = $vals['request'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'MiczoneCatalogGatewayService_getCategoryById_args';
+  }
+
+  public function read($input) {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true) {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid) {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->operationHandle = new \Miczone\Thrift\Common\OperationHandle();
+            $xfer += $this->operationHandle->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRUCT) {
+            $this->request = new \Miczone\Thrift\Catalog\GetCategoryByIdRequest();
+            $xfer += $this->request->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('MiczoneCatalogGatewayService_getCategoryById_args');
+    if ($this->operationHandle !== null) {
+      if (!is_object($this->operationHandle)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('operationHandle', TType::STRUCT, 1);
+      $xfer += $this->operationHandle->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->request !== null) {
+      if (!is_object($this->request)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('request', TType::STRUCT, 2);
+      $xfer += $this->request->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+
+    return $xfer;
+  }
+
+}
+
+class MiczoneCatalogGatewayService_getCategoryById_result {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Catalog\GetCategoryByIdResponse
+   */
+  public $success = null;
+
+  public function __construct($vals = null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\GetCategoryByIdResponse',
+        ),
+      );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'MiczoneCatalogGatewayService_getCategoryById_result';
+  }
+
+  public function read($input) {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true) {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid) {
+        case 0:
+          if ($ftype == TType::STRUCT) {
+            $this->success = new \Miczone\Thrift\Catalog\GetCategoryByIdResponse();
+            $xfer += $this->success->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('MiczoneCatalogGatewayService_getCategoryById_result');
+    if ($this->success !== null) {
+      if (!is_object($this->success)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
+      $xfer += $this->success->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+
+    return $xfer;
+  }
+
+}
+
+class MiczoneCatalogGatewayService_getCategoryBySlug_args {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Common\OperationHandle
+   */
+  public $operationHandle = null;
+  /**
+   * @var \Miczone\Thrift\Catalog\GetCategoryBySlugRequest
+   */
+  public $request = null;
+
+  public function __construct($vals = null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'operationHandle',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Common\OperationHandle',
+        ),
+        2 => array(
+          'var' => 'request',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\GetCategoryBySlugRequest',
+        ),
+      );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['operationHandle'])) {
+        $this->operationHandle = $vals['operationHandle'];
+      }
+      if (isset($vals['request'])) {
+        $this->request = $vals['request'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'MiczoneCatalogGatewayService_getCategoryBySlug_args';
+  }
+
+  public function read($input) {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true) {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid) {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->operationHandle = new \Miczone\Thrift\Common\OperationHandle();
+            $xfer += $this->operationHandle->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRUCT) {
+            $this->request = new \Miczone\Thrift\Catalog\GetCategoryBySlugRequest();
+            $xfer += $this->request->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('MiczoneCatalogGatewayService_getCategoryBySlug_args');
+    if ($this->operationHandle !== null) {
+      if (!is_object($this->operationHandle)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('operationHandle', TType::STRUCT, 1);
+      $xfer += $this->operationHandle->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->request !== null) {
+      if (!is_object($this->request)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('request', TType::STRUCT, 2);
+      $xfer += $this->request->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+
+    return $xfer;
+  }
+
+}
+
+class MiczoneCatalogGatewayService_getCategoryBySlug_result {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Catalog\GetCategoryBySlugResponse
+   */
+  public $success = null;
+
+  public function __construct($vals = null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\GetCategoryBySlugResponse',
+        ),
+      );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'MiczoneCatalogGatewayService_getCategoryBySlug_result';
+  }
+
+  public function read($input) {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true) {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid) {
+        case 0:
+          if ($ftype == TType::STRUCT) {
+            $this->success = new \Miczone\Thrift\Catalog\GetCategoryBySlugResponse();
+            $xfer += $this->success->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('MiczoneCatalogGatewayService_getCategoryBySlug_result');
     if ($this->success !== null) {
       if (!is_object($this->success)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
