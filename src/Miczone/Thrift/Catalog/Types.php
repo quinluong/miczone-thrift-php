@@ -3996,7 +3996,7 @@ class Category {
    */
   public $metaDescription = null;
   /**
-   * @var \Miczone\Thrift\Catalog\OriginalCategory[]
+   * @var \Miczone\Thrift\Catalog\SimpleOriginalCategory[]
    */
   public $originalCategoryList = null;
 
@@ -4053,7 +4053,7 @@ class Category {
           'etype' => TType::STRUCT,
           'elem' => array(
             'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\OriginalCategory',
+            'class' => '\Miczone\Thrift\Catalog\SimpleOriginalCategory',
           ),
         ),
       );
@@ -4199,7 +4199,7 @@ class Category {
             $xfer += $input->readListBegin($_etype35, $_size32);
             for ($_i36 = 0; $_i36 < $_size32; ++$_i36) {
               $elem37 = null;
-              $elem37 = new \Miczone\Thrift\Catalog\OriginalCategory();
+              $elem37 = new \Miczone\Thrift\Catalog\SimpleOriginalCategory();
               $xfer += $elem37->read($input);
               $this->originalCategoryList[] = $elem37;
             }
@@ -4521,9 +4521,9 @@ class SimpleOriginalCategory {
    */
   public $id = null;
   /**
-   * @var string
+   * @var \Miczone\Thrift\Catalog\SimpleSource
    */
-  public $sourceId = null;
+  public $source = null;
   /**
    * @var string
    */
@@ -4541,8 +4541,9 @@ class SimpleOriginalCategory {
           'type' => TType::STRING,
         ),
         2 => array(
-          'var' => 'sourceId',
-          'type' => TType::STRING,
+          'var' => 'source',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\SimpleSource',
         ),
         3 => array(
           'var' => 'originalCategoryId',
@@ -4558,8 +4559,8 @@ class SimpleOriginalCategory {
       if (isset($vals['id'])) {
         $this->id = $vals['id'];
       }
-      if (isset($vals['sourceId'])) {
-        $this->sourceId = $vals['sourceId'];
+      if (isset($vals['source'])) {
+        $this->source = $vals['source'];
       }
       if (isset($vals['originalCategoryId'])) {
         $this->originalCategoryId = $vals['originalCategoryId'];
@@ -4594,8 +4595,9 @@ class SimpleOriginalCategory {
           }
           break;
         case 2:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->sourceId);
+          if ($ftype == TType::STRUCT) {
+            $this->source = new \Miczone\Thrift\Catalog\SimpleSource();
+            $xfer += $this->source->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -4633,9 +4635,12 @@ class SimpleOriginalCategory {
       $xfer += $output->writeString($this->id);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->sourceId !== null) {
-      $xfer += $output->writeFieldBegin('sourceId', TType::STRING, 2);
-      $xfer += $output->writeString($this->sourceId);
+    if ($this->source !== null) {
+      if (!is_object($this->source)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('source', TType::STRUCT, 2);
+      $xfer += $this->source->write($output);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->originalCategoryId !== null) {
@@ -4876,9 +4881,9 @@ class SimpleOriginalMerchant {
    */
   public $id = null;
   /**
-   * @var string
+   * @var \Miczone\Thrift\Catalog\SimpleSource
    */
-  public $sourceId = null;
+  public $source = null;
   /**
    * @var string
    */
@@ -4896,8 +4901,9 @@ class SimpleOriginalMerchant {
           'type' => TType::STRING,
         ),
         2 => array(
-          'var' => 'sourceId',
-          'type' => TType::STRING,
+          'var' => 'source',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\SimpleSource',
         ),
         3 => array(
           'var' => 'originalMerchantId',
@@ -4913,8 +4919,8 @@ class SimpleOriginalMerchant {
       if (isset($vals['id'])) {
         $this->id = $vals['id'];
       }
-      if (isset($vals['sourceId'])) {
-        $this->sourceId = $vals['sourceId'];
+      if (isset($vals['source'])) {
+        $this->source = $vals['source'];
       }
       if (isset($vals['originalMerchantId'])) {
         $this->originalMerchantId = $vals['originalMerchantId'];
@@ -4949,8 +4955,9 @@ class SimpleOriginalMerchant {
           }
           break;
         case 2:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->sourceId);
+          if ($ftype == TType::STRUCT) {
+            $this->source = new \Miczone\Thrift\Catalog\SimpleSource();
+            $xfer += $this->source->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -4988,9 +4995,12 @@ class SimpleOriginalMerchant {
       $xfer += $output->writeString($this->id);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->sourceId !== null) {
-      $xfer += $output->writeFieldBegin('sourceId', TType::STRING, 2);
-      $xfer += $output->writeString($this->sourceId);
+    if ($this->source !== null) {
+      if (!is_object($this->source)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('source', TType::STRUCT, 2);
+      $xfer += $this->source->write($output);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->originalMerchantId !== null) {
@@ -5231,9 +5241,9 @@ class SimpleOriginalBrand {
    */
   public $id = null;
   /**
-   * @var string
+   * @var \Miczone\Thrift\Catalog\SimpleSource
    */
-  public $sourceId = null;
+  public $source = null;
   /**
    * @var string
    */
@@ -5251,8 +5261,9 @@ class SimpleOriginalBrand {
           'type' => TType::STRING,
         ),
         2 => array(
-          'var' => 'sourceId',
-          'type' => TType::STRING,
+          'var' => 'source',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\SimpleSource',
         ),
         3 => array(
           'var' => 'originalBrandId',
@@ -5268,8 +5279,8 @@ class SimpleOriginalBrand {
       if (isset($vals['id'])) {
         $this->id = $vals['id'];
       }
-      if (isset($vals['sourceId'])) {
-        $this->sourceId = $vals['sourceId'];
+      if (isset($vals['source'])) {
+        $this->source = $vals['source'];
       }
       if (isset($vals['originalBrandId'])) {
         $this->originalBrandId = $vals['originalBrandId'];
@@ -5304,8 +5315,9 @@ class SimpleOriginalBrand {
           }
           break;
         case 2:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->sourceId);
+          if ($ftype == TType::STRUCT) {
+            $this->source = new \Miczone\Thrift\Catalog\SimpleSource();
+            $xfer += $this->source->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -5343,14 +5355,372 @@ class SimpleOriginalBrand {
       $xfer += $output->writeString($this->id);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->sourceId !== null) {
-      $xfer += $output->writeFieldBegin('sourceId', TType::STRING, 2);
-      $xfer += $output->writeString($this->sourceId);
+    if ($this->source !== null) {
+      if (!is_object($this->source)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('source', TType::STRUCT, 2);
+      $xfer += $this->source->write($output);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->originalBrandId !== null) {
       $xfer += $output->writeFieldBegin('originalBrandId', TType::STRING, 3);
       $xfer += $output->writeString($this->originalBrandId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->name !== null) {
+      $xfer += $output->writeFieldBegin('name', TType::STRING, 4);
+      $xfer += $output->writeString($this->name);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+
+    return $xfer;
+  }
+
+}
+
+class Source {
+  static $_TSPEC;
+
+  /**
+   * @var int
+   */
+  public $createdAt = null;
+  /**
+   * @var int
+   */
+  public $updatedAt = null;
+  /**
+   * @var bool
+   */
+  public $isActive = null;
+  /**
+   * @var string
+   */
+  public $id = null;
+  /**
+   * @var string
+   */
+  public $websiteCode = null;
+  /**
+   * @var string
+   */
+  public $countryCode = null;
+  /**
+   * @var string
+   */
+  public $name = null;
+
+  public function __construct($vals = null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'createdAt',
+          'type' => TType::I64,
+        ),
+        2 => array(
+          'var' => 'updatedAt',
+          'type' => TType::I64,
+        ),
+        3 => array(
+          'var' => 'isActive',
+          'type' => TType::BOOL,
+        ),
+        4 => array(
+          'var' => 'id',
+          'type' => TType::STRING,
+        ),
+        5 => array(
+          'var' => 'websiteCode',
+          'type' => TType::STRING,
+        ),
+        6 => array(
+          'var' => 'countryCode',
+          'type' => TType::STRING,
+        ),
+        7 => array(
+          'var' => 'name',
+          'type' => TType::STRING,
+        ),
+      );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['createdAt'])) {
+        $this->createdAt = $vals['createdAt'];
+      }
+      if (isset($vals['updatedAt'])) {
+        $this->updatedAt = $vals['updatedAt'];
+      }
+      if (isset($vals['isActive'])) {
+        $this->isActive = $vals['isActive'];
+      }
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
+      }
+      if (isset($vals['websiteCode'])) {
+        $this->websiteCode = $vals['websiteCode'];
+      }
+      if (isset($vals['countryCode'])) {
+        $this->countryCode = $vals['countryCode'];
+      }
+      if (isset($vals['name'])) {
+        $this->name = $vals['name'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'Source';
+  }
+
+  public function read($input) {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true) {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid) {
+        case 1:
+          if ($ftype == TType::I64) {
+            $xfer += $input->readI64($this->createdAt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::I64) {
+            $xfer += $input->readI64($this->updatedAt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->isActive);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 4:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->id);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 5:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->websiteCode);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 6:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->countryCode);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 7:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->name);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('Source');
+    if ($this->createdAt !== null) {
+      $xfer += $output->writeFieldBegin('createdAt', TType::I64, 1);
+      $xfer += $output->writeI64($this->createdAt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->updatedAt !== null) {
+      $xfer += $output->writeFieldBegin('updatedAt', TType::I64, 2);
+      $xfer += $output->writeI64($this->updatedAt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->isActive !== null) {
+      $xfer += $output->writeFieldBegin('isActive', TType::BOOL, 3);
+      $xfer += $output->writeBool($this->isActive);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 4);
+      $xfer += $output->writeString($this->id);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->websiteCode !== null) {
+      $xfer += $output->writeFieldBegin('websiteCode', TType::STRING, 5);
+      $xfer += $output->writeString($this->websiteCode);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->countryCode !== null) {
+      $xfer += $output->writeFieldBegin('countryCode', TType::STRING, 6);
+      $xfer += $output->writeString($this->countryCode);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->name !== null) {
+      $xfer += $output->writeFieldBegin('name', TType::STRING, 7);
+      $xfer += $output->writeString($this->name);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+
+    return $xfer;
+  }
+
+}
+
+class SimpleSource {
+  static $_TSPEC;
+
+  /**
+   * @var string
+   */
+  public $id = null;
+  /**
+   * @var string
+   */
+  public $websiteCode = null;
+  /**
+   * @var string
+   */
+  public $countryCode = null;
+  /**
+   * @var string
+   */
+  public $name = null;
+
+  public function __construct($vals = null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'id',
+          'type' => TType::STRING,
+        ),
+        2 => array(
+          'var' => 'websiteCode',
+          'type' => TType::STRING,
+        ),
+        3 => array(
+          'var' => 'countryCode',
+          'type' => TType::STRING,
+        ),
+        4 => array(
+          'var' => 'name',
+          'type' => TType::STRING,
+        ),
+      );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
+      }
+      if (isset($vals['websiteCode'])) {
+        $this->websiteCode = $vals['websiteCode'];
+      }
+      if (isset($vals['countryCode'])) {
+        $this->countryCode = $vals['countryCode'];
+      }
+      if (isset($vals['name'])) {
+        $this->name = $vals['name'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'SimpleSource';
+  }
+
+  public function read($input) {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true) {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid) {
+        case 1:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->id);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->websiteCode);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->countryCode);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 4:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->name);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('SimpleSource');
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 1);
+      $xfer += $output->writeString($this->id);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->websiteCode !== null) {
+      $xfer += $output->writeFieldBegin('websiteCode', TType::STRING, 2);
+      $xfer += $output->writeString($this->websiteCode);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->countryCode !== null) {
+      $xfer += $output->writeFieldBegin('countryCode', TType::STRING, 3);
+      $xfer += $output->writeString($this->countryCode);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->name !== null) {
