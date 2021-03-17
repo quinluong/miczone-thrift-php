@@ -234,9 +234,9 @@ class SimpleOriginalBrand {
   static $_TSPEC;
 
   /**
-   * @var \Miczone\Thrift\Catalog\Source\SimpleSource
+   * @var string
    */
-  public $source = null;
+  public $id = null;
   /**
    * @var string
    */
@@ -250,9 +250,8 @@ class SimpleOriginalBrand {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'source',
-          'type' => TType::STRUCT,
-          'class' => '\Miczone\Thrift\Catalog\Source\SimpleSource',
+          'var' => 'id',
+          'type' => TType::STRING,
           ),
         2 => array(
           'var' => 'originalId',
@@ -265,8 +264,8 @@ class SimpleOriginalBrand {
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['source'])) {
-        $this->source = $vals['source'];
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
       }
       if (isset($vals['originalId'])) {
         $this->originalId = $vals['originalId'];
@@ -297,9 +296,8 @@ class SimpleOriginalBrand {
       switch ($fid)
       {
         case 1:
-          if ($ftype == TType::STRUCT) {
-            $this->source = new \Miczone\Thrift\Catalog\Source\SimpleSource();
-            $xfer += $this->source->read($input);
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->id);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -331,12 +329,9 @@ class SimpleOriginalBrand {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('SimpleOriginalBrand');
-    if ($this->source !== null) {
-      if (!is_object($this->source)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('source', TType::STRUCT, 1);
-      $xfer += $this->source->write($output);
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 1);
+      $xfer += $output->writeString($this->id);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->originalId !== null) {

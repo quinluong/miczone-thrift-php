@@ -1304,6 +1304,10 @@ class SimpleCategory {
   /**
    * @var string
    */
+  public $id = null;
+  /**
+   * @var string
+   */
   public $name = null;
   /**
    * @var string
@@ -1314,16 +1318,23 @@ class SimpleCategory {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'name',
+          'var' => 'id',
           'type' => TType::STRING,
           ),
         2 => array(
+          'var' => 'name',
+          'type' => TType::STRING,
+          ),
+        3 => array(
           'var' => 'slug',
           'type' => TType::STRING,
           ),
         );
     }
     if (is_array($vals)) {
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
+      }
       if (isset($vals['name'])) {
         $this->name = $vals['name'];
       }
@@ -1354,12 +1365,19 @@ class SimpleCategory {
       {
         case 1:
           if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->name);
+            $xfer += $input->readString($this->id);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 2:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->name);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
           if ($ftype == TType::STRING) {
             $xfer += $input->readString($this->slug);
           } else {
@@ -1379,13 +1397,18 @@ class SimpleCategory {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('SimpleCategory');
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 1);
+      $xfer += $output->writeString($this->id);
+      $xfer += $output->writeFieldEnd();
+    }
     if ($this->name !== null) {
-      $xfer += $output->writeFieldBegin('name', TType::STRING, 1);
+      $xfer += $output->writeFieldBegin('name', TType::STRING, 2);
       $xfer += $output->writeString($this->name);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->slug !== null) {
-      $xfer += $output->writeFieldBegin('slug', TType::STRING, 2);
+      $xfer += $output->writeFieldBegin('slug', TType::STRING, 3);
       $xfer += $output->writeString($this->slug);
       $xfer += $output->writeFieldEnd();
     }

@@ -236,6 +236,10 @@ class SimpleSource {
   /**
    * @var string
    */
+  public $id = null;
+  /**
+   * @var string
+   */
   public $websiteCode = null;
   /**
    * @var string
@@ -246,16 +250,23 @@ class SimpleSource {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'websiteCode',
+          'var' => 'id',
           'type' => TType::STRING,
           ),
         2 => array(
+          'var' => 'websiteCode',
+          'type' => TType::STRING,
+          ),
+        3 => array(
           'var' => 'countryCode',
           'type' => TType::STRING,
           ),
         );
     }
     if (is_array($vals)) {
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
+      }
       if (isset($vals['websiteCode'])) {
         $this->websiteCode = $vals['websiteCode'];
       }
@@ -286,12 +297,19 @@ class SimpleSource {
       {
         case 1:
           if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->websiteCode);
+            $xfer += $input->readString($this->id);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 2:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->websiteCode);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
           if ($ftype == TType::STRING) {
             $xfer += $input->readString($this->countryCode);
           } else {
@@ -311,13 +329,18 @@ class SimpleSource {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('SimpleSource');
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 1);
+      $xfer += $output->writeString($this->id);
+      $xfer += $output->writeFieldEnd();
+    }
     if ($this->websiteCode !== null) {
-      $xfer += $output->writeFieldBegin('websiteCode', TType::STRING, 1);
+      $xfer += $output->writeFieldBegin('websiteCode', TType::STRING, 2);
       $xfer += $output->writeString($this->websiteCode);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->countryCode !== null) {
-      $xfer += $output->writeFieldBegin('countryCode', TType::STRING, 2);
+      $xfer += $output->writeFieldBegin('countryCode', TType::STRING, 3);
       $xfer += $output->writeString($this->countryCode);
       $xfer += $output->writeFieldEnd();
     }

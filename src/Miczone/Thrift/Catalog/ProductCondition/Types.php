@@ -205,6 +205,10 @@ class SimpleProductCondition {
   /**
    * @var string
    */
+  public $id = null;
+  /**
+   * @var string
+   */
   public $code = null;
   /**
    * @var string
@@ -215,16 +219,23 @@ class SimpleProductCondition {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'code',
+          'var' => 'id',
           'type' => TType::STRING,
           ),
         2 => array(
+          'var' => 'code',
+          'type' => TType::STRING,
+          ),
+        3 => array(
           'var' => 'name',
           'type' => TType::STRING,
           ),
         );
     }
     if (is_array($vals)) {
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
+      }
       if (isset($vals['code'])) {
         $this->code = $vals['code'];
       }
@@ -255,12 +266,19 @@ class SimpleProductCondition {
       {
         case 1:
           if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->code);
+            $xfer += $input->readString($this->id);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 2:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->code);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
           if ($ftype == TType::STRING) {
             $xfer += $input->readString($this->name);
           } else {
@@ -280,13 +298,18 @@ class SimpleProductCondition {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('SimpleProductCondition');
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 1);
+      $xfer += $output->writeString($this->id);
+      $xfer += $output->writeFieldEnd();
+    }
     if ($this->code !== null) {
-      $xfer += $output->writeFieldBegin('code', TType::STRING, 1);
+      $xfer += $output->writeFieldBegin('code', TType::STRING, 2);
       $xfer += $output->writeString($this->code);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->name !== null) {
-      $xfer += $output->writeFieldBegin('name', TType::STRING, 2);
+      $xfer += $output->writeFieldBegin('name', TType::STRING, 3);
       $xfer += $output->writeString($this->name);
       $xfer += $output->writeFieldEnd();
     }

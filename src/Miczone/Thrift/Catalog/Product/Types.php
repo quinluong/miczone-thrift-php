@@ -585,6 +585,10 @@ class Product {
    * @var \Miczone\Thrift\Catalog\ProductCondition\SimpleProductCondition
    */
   public $condition = null;
+  /**
+   * @var bool
+   */
+  public $isOutOfStock = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -687,6 +691,10 @@ class Product {
           'type' => TType::STRUCT,
           'class' => '\Miczone\Thrift\Catalog\ProductCondition\SimpleProductCondition',
           ),
+        22 => array(
+          'var' => 'isOutOfStock',
+          'type' => TType::BOOL,
+          ),
         );
     }
     if (is_array($vals)) {
@@ -752,6 +760,9 @@ class Product {
       }
       if (isset($vals['condition'])) {
         $this->condition = $vals['condition'];
+      }
+      if (isset($vals['isOutOfStock'])) {
+        $this->isOutOfStock = $vals['isOutOfStock'];
       }
     }
   }
@@ -948,6 +959,13 @@ class Product {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 22:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->isOutOfStock);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -1103,6 +1121,11 @@ class Product {
       }
       $xfer += $output->writeFieldBegin('condition', TType::STRUCT, 21);
       $xfer += $this->condition->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->isOutOfStock !== null) {
+      $xfer += $output->writeFieldBegin('isOutOfStock', TType::BOOL, 22);
+      $xfer += $output->writeBool($this->isOutOfStock);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
