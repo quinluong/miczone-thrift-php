@@ -35,6 +35,12 @@ interface MiczoneCatalogStorageServiceIf {
   public function multiGetProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdListRequest $request);
   /**
    * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+   * @param \Miczone\Thrift\Catalog\Product\GetProductListRequest $request
+   * @return \Miczone\Thrift\Catalog\Product\GetProductListResponse
+   */
+  public function getProductList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetProductListRequest $request);
+  /**
+   * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
    * @param \Miczone\Thrift\Catalog\Category\GetCategoryByIdRequest $request
    * @return \Miczone\Thrift\Catalog\Category\GetCategoryByIdResponse
    */
@@ -222,6 +228,58 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
       return $result->success;
     }
     throw new \Exception("multiGetProductByIdList failed: unknown result");
+  }
+
+  public function getProductList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetProductListRequest $request)
+  {
+    $this->send_getProductList($operationHandle, $request);
+    return $this->recv_getProductList();
+  }
+
+  public function send_getProductList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetProductListRequest $request)
+  {
+    $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_getProductList_args();
+    $args->operationHandle = $operationHandle;
+    $args->request = $request;
+    $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'getProductList', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('getProductList', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_getProductList()
+  {
+    $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_getProductList_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_getProductList_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new \Exception("getProductList failed: unknown result");
   }
 
   public function getCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByIdRequest $request)
@@ -922,6 +980,194 @@ class MiczoneCatalogStorageService_multiGetProductByIdList_result {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_multiGetProductByIdList_result');
+    if ($this->success !== null) {
+      if (!is_object($this->success)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
+      $xfer += $this->success->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class MiczoneCatalogStorageService_getProductList_args {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Common\OperationHandle
+   */
+  public $operationHandle = null;
+  /**
+   * @var \Miczone\Thrift\Catalog\Product\GetProductListRequest
+   */
+  public $request = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'operationHandle',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Common\OperationHandle',
+          ),
+        2 => array(
+          'var' => 'request',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\Product\GetProductListRequest',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['operationHandle'])) {
+        $this->operationHandle = $vals['operationHandle'];
+      }
+      if (isset($vals['request'])) {
+        $this->request = $vals['request'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'MiczoneCatalogStorageService_getProductList_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->operationHandle = new \Miczone\Thrift\Common\OperationHandle();
+            $xfer += $this->operationHandle->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRUCT) {
+            $this->request = new \Miczone\Thrift\Catalog\Product\GetProductListRequest();
+            $xfer += $this->request->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_getProductList_args');
+    if ($this->operationHandle !== null) {
+      if (!is_object($this->operationHandle)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('operationHandle', TType::STRUCT, 1);
+      $xfer += $this->operationHandle->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->request !== null) {
+      if (!is_object($this->request)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('request', TType::STRUCT, 2);
+      $xfer += $this->request->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class MiczoneCatalogStorageService_getProductList_result {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Catalog\Product\GetProductListResponse
+   */
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\Product\GetProductListResponse',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'MiczoneCatalogStorageService_getProductList_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::STRUCT) {
+            $this->success = new \Miczone\Thrift\Catalog\Product\GetProductListResponse();
+            $xfer += $this->success->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_getProductList_result');
     if ($this->success !== null) {
       if (!is_object($this->success)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

@@ -498,6 +498,361 @@ class MultiGetProductByIdListResponse {
 
 }
 
+class GetProductListRequest {
+  static $_TSPEC;
+
+  /**
+   * @var string
+   */
+  public $fromId = null;
+  /**
+   * @var int
+   */
+  public $limit = 10;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'fromId',
+          'type' => TType::STRING,
+          ),
+        2 => array(
+          'var' => 'limit',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['fromId'])) {
+        $this->fromId = $vals['fromId'];
+      }
+      if (isset($vals['limit'])) {
+        $this->limit = $vals['limit'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetProductListRequest';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->fromId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->limit);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetProductListRequest');
+    if ($this->fromId !== null) {
+      $xfer += $output->writeFieldBegin('fromId', TType::STRING, 1);
+      $xfer += $output->writeString($this->fromId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->limit !== null) {
+      $xfer += $output->writeFieldBegin('limit', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->limit);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class GetProductListResponseData {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Catalog\Product\Product[]
+   */
+  public $dataList = null;
+  /**
+   * @var string
+   */
+  public $lastId = null;
+  /**
+   * @var bool
+   */
+  public $hasNext = false;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'dataList',
+          'type' => TType::LST,
+          'etype' => TType::STRUCT,
+          'elem' => array(
+            'type' => TType::STRUCT,
+            'class' => '\Miczone\Thrift\Catalog\Product\Product',
+            ),
+          ),
+        2 => array(
+          'var' => 'lastId',
+          'type' => TType::STRING,
+          ),
+        3 => array(
+          'var' => 'hasNext',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['dataList'])) {
+        $this->dataList = $vals['dataList'];
+      }
+      if (isset($vals['lastId'])) {
+        $this->lastId = $vals['lastId'];
+      }
+      if (isset($vals['hasNext'])) {
+        $this->hasNext = $vals['hasNext'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetProductListResponseData';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::LST) {
+            $this->dataList = array();
+            $_size16 = 0;
+            $_etype19 = 0;
+            $xfer += $input->readListBegin($_etype19, $_size16);
+            for ($_i20 = 0; $_i20 < $_size16; ++$_i20)
+            {
+              $elem21 = null;
+              $elem21 = new \Miczone\Thrift\Catalog\Product\Product();
+              $xfer += $elem21->read($input);
+              $this->dataList []= $elem21;
+            }
+            $xfer += $input->readListEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->lastId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->hasNext);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetProductListResponseData');
+    if ($this->dataList !== null) {
+      if (!is_array($this->dataList)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('dataList', TType::LST, 1);
+      {
+        $output->writeListBegin(TType::STRUCT, count($this->dataList));
+        {
+          foreach ($this->dataList as $iter22)
+          {
+            $xfer += $iter22->write($output);
+          }
+        }
+        $output->writeListEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->lastId !== null) {
+      $xfer += $output->writeFieldBegin('lastId', TType::STRING, 2);
+      $xfer += $output->writeString($this->lastId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->hasNext !== null) {
+      $xfer += $output->writeFieldBegin('hasNext', TType::BOOL, 3);
+      $xfer += $output->writeBool($this->hasNext);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class GetProductListResponse {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Common\Error
+   */
+  public $error = null;
+  /**
+   * @var \Miczone\Thrift\Catalog\Product\GetProductListResponseData
+   */
+  public $data = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'error',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Common\Error',
+          ),
+        2 => array(
+          'var' => 'data',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\Product\GetProductListResponseData',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['error'])) {
+        $this->error = $vals['error'];
+      }
+      if (isset($vals['data'])) {
+        $this->data = $vals['data'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetProductListResponse';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->error = new \Miczone\Thrift\Common\Error();
+            $xfer += $this->error->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRUCT) {
+            $this->data = new \Miczone\Thrift\Catalog\Product\GetProductListResponseData();
+            $xfer += $this->data->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetProductListResponse');
+    if ($this->error !== null) {
+      if (!is_object($this->error)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('error', TType::STRUCT, 1);
+      $xfer += $this->error->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->data !== null) {
+      if (!is_object($this->data)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('data', TType::STRUCT, 2);
+      $xfer += $this->data->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class Product {
   static $_TSPEC;
 
@@ -825,15 +1180,15 @@ class Product {
         case 6:
           if ($ftype == TType::LST) {
             $this->categoryList = array();
-            $_size16 = 0;
-            $_etype19 = 0;
-            $xfer += $input->readListBegin($_etype19, $_size16);
-            for ($_i20 = 0; $_i20 < $_size16; ++$_i20)
+            $_size23 = 0;
+            $_etype26 = 0;
+            $xfer += $input->readListBegin($_etype26, $_size23);
+            for ($_i27 = 0; $_i27 < $_size23; ++$_i27)
             {
-              $elem21 = null;
-              $elem21 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
-              $xfer += $elem21->read($input);
-              $this->categoryList []= $elem21;
+              $elem28 = null;
+              $elem28 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
+              $xfer += $elem28->read($input);
+              $this->categoryList []= $elem28;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -902,14 +1257,14 @@ class Product {
         case 15:
           if ($ftype == TType::LST) {
             $this->imageList = array();
-            $_size22 = 0;
-            $_etype25 = 0;
-            $xfer += $input->readListBegin($_etype25, $_size22);
-            for ($_i26 = 0; $_i26 < $_size22; ++$_i26)
+            $_size29 = 0;
+            $_etype32 = 0;
+            $xfer += $input->readListBegin($_etype32, $_size29);
+            for ($_i33 = 0; $_i33 < $_size29; ++$_i33)
             {
-              $elem27 = null;
-              $xfer += $input->readString($elem27);
-              $this->imageList []= $elem27;
+              $elem34 = null;
+              $xfer += $input->readString($elem34);
+              $this->imageList []= $elem34;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -1015,9 +1370,9 @@ class Product {
       {
         $output->writeListBegin(TType::STRUCT, count($this->categoryList));
         {
-          foreach ($this->categoryList as $iter28)
+          foreach ($this->categoryList as $iter35)
           {
-            $xfer += $iter28->write($output);
+            $xfer += $iter35->write($output);
           }
         }
         $output->writeListEnd();
@@ -1081,9 +1436,9 @@ class Product {
       {
         $output->writeListBegin(TType::STRING, count($this->imageList));
         {
-          foreach ($this->imageList as $iter29)
+          foreach ($this->imageList as $iter36)
           {
-            $xfer += $output->writeString($iter29);
+            $xfer += $output->writeString($iter36);
           }
         }
         $output->writeListEnd();
