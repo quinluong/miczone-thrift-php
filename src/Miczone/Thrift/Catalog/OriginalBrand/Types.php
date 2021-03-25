@@ -238,6 +238,10 @@ class SimpleOriginalBrand {
    */
   public $id = null;
   /**
+   * @var \Miczone\Thrift\Catalog\Source\SimpleSource
+   */
+  public $source = null;
+  /**
    * @var string
    */
   public $originalId = null;
@@ -254,10 +258,15 @@ class SimpleOriginalBrand {
           'type' => TType::STRING,
           ),
         2 => array(
+          'var' => 'source',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\Source\SimpleSource',
+          ),
+        3 => array(
           'var' => 'originalId',
           'type' => TType::STRING,
           ),
-        3 => array(
+        4 => array(
           'var' => 'name',
           'type' => TType::STRING,
           ),
@@ -266,6 +275,9 @@ class SimpleOriginalBrand {
     if (is_array($vals)) {
       if (isset($vals['id'])) {
         $this->id = $vals['id'];
+      }
+      if (isset($vals['source'])) {
+        $this->source = $vals['source'];
       }
       if (isset($vals['originalId'])) {
         $this->originalId = $vals['originalId'];
@@ -303,13 +315,21 @@ class SimpleOriginalBrand {
           }
           break;
         case 2:
+          if ($ftype == TType::STRUCT) {
+            $this->source = new \Miczone\Thrift\Catalog\Source\SimpleSource();
+            $xfer += $this->source->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
           if ($ftype == TType::STRING) {
             $xfer += $input->readString($this->originalId);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
-        case 3:
+        case 4:
           if ($ftype == TType::STRING) {
             $xfer += $input->readString($this->name);
           } else {
@@ -334,13 +354,21 @@ class SimpleOriginalBrand {
       $xfer += $output->writeString($this->id);
       $xfer += $output->writeFieldEnd();
     }
+    if ($this->source !== null) {
+      if (!is_object($this->source)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('source', TType::STRUCT, 2);
+      $xfer += $this->source->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
     if ($this->originalId !== null) {
-      $xfer += $output->writeFieldBegin('originalId', TType::STRING, 2);
+      $xfer += $output->writeFieldBegin('originalId', TType::STRING, 3);
       $xfer += $output->writeString($this->originalId);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->name !== null) {
-      $xfer += $output->writeFieldBegin('name', TType::STRING, 3);
+      $xfer += $output->writeFieldBegin('name', TType::STRING, 4);
       $xfer += $output->writeString($this->name);
       $xfer += $output->writeFieldEnd();
     }
