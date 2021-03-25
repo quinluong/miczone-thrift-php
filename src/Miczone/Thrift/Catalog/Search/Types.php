@@ -295,11 +295,11 @@ class SearchProductRequest {
   /**
    * @var int
    */
-  public $productCount = null;
+  public $productCount = 10;
   /**
    * @var int
    */
-  public $productPage = null;
+  public $productPage = 1;
   /**
    * @var bool
    */
@@ -1363,6 +1363,10 @@ class SearchProductResponseData {
   /**
    * @var int
    */
+  public $totalPage = null;
+  /**
+   * @var int
+   */
   public $productCount = null;
   /**
    * @var int
@@ -1385,14 +1389,18 @@ class SearchProductResponseData {
           'type' => TType::I64,
           ),
         2 => array(
+          'var' => 'totalPage',
+          'type' => TType::I64,
+          ),
+        3 => array(
           'var' => 'productCount',
           'type' => TType::BYTE,
           ),
-        3 => array(
+        4 => array(
           'var' => 'productPage',
           'type' => TType::I32,
           ),
-        4 => array(
+        5 => array(
           'var' => 'productList',
           'type' => TType::LST,
           'etype' => TType::STRUCT,
@@ -1401,7 +1409,7 @@ class SearchProductResponseData {
             'class' => '\Miczone\Thrift\Catalog\Search\Product',
             ),
           ),
-        5 => array(
+        6 => array(
           'var' => 'refinement',
           'type' => TType::STRUCT,
           'class' => '\Miczone\Thrift\Catalog\Search\SearchProductResponseDataRefinement',
@@ -1411,6 +1419,9 @@ class SearchProductResponseData {
     if (is_array($vals)) {
       if (isset($vals['totalProduct'])) {
         $this->totalProduct = $vals['totalProduct'];
+      }
+      if (isset($vals['totalPage'])) {
+        $this->totalPage = $vals['totalPage'];
       }
       if (isset($vals['productCount'])) {
         $this->productCount = $vals['productCount'];
@@ -1454,20 +1465,27 @@ class SearchProductResponseData {
           }
           break;
         case 2:
+          if ($ftype == TType::I64) {
+            $xfer += $input->readI64($this->totalPage);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
           if ($ftype == TType::BYTE) {
             $xfer += $input->readByte($this->productCount);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
-        case 3:
+        case 4:
           if ($ftype == TType::I32) {
             $xfer += $input->readI32($this->productPage);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
-        case 4:
+        case 5:
           if ($ftype == TType::LST) {
             $this->productList = array();
             $_size49 = 0;
@@ -1485,7 +1503,7 @@ class SearchProductResponseData {
             $xfer += $input->skip($ftype);
           }
           break;
-        case 5:
+        case 6:
           if ($ftype == TType::STRUCT) {
             $this->refinement = new \Miczone\Thrift\Catalog\Search\SearchProductResponseDataRefinement();
             $xfer += $this->refinement->read($input);
@@ -1511,13 +1529,18 @@ class SearchProductResponseData {
       $xfer += $output->writeI64($this->totalProduct);
       $xfer += $output->writeFieldEnd();
     }
+    if ($this->totalPage !== null) {
+      $xfer += $output->writeFieldBegin('totalPage', TType::I64, 2);
+      $xfer += $output->writeI64($this->totalPage);
+      $xfer += $output->writeFieldEnd();
+    }
     if ($this->productCount !== null) {
-      $xfer += $output->writeFieldBegin('productCount', TType::BYTE, 2);
+      $xfer += $output->writeFieldBegin('productCount', TType::BYTE, 3);
       $xfer += $output->writeByte($this->productCount);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->productPage !== null) {
-      $xfer += $output->writeFieldBegin('productPage', TType::I32, 3);
+      $xfer += $output->writeFieldBegin('productPage', TType::I32, 4);
       $xfer += $output->writeI32($this->productPage);
       $xfer += $output->writeFieldEnd();
     }
@@ -1525,7 +1548,7 @@ class SearchProductResponseData {
       if (!is_array($this->productList)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('productList', TType::LST, 4);
+      $xfer += $output->writeFieldBegin('productList', TType::LST, 5);
       {
         $output->writeListBegin(TType::STRUCT, count($this->productList));
         {
@@ -1542,7 +1565,7 @@ class SearchProductResponseData {
       if (!is_object($this->refinement)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('refinement', TType::STRUCT, 5);
+      $xfer += $output->writeFieldBegin('refinement', TType::STRUCT, 6);
       $xfer += $this->refinement->write($output);
       $xfer += $output->writeFieldEnd();
     }
