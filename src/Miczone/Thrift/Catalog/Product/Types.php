@@ -944,6 +944,10 @@ class Product {
    * @var bool
    */
   public $isOutOfStock = null;
+  /**
+   * @var int
+   */
+  public $crawlerUpdatedAt = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -1050,6 +1054,10 @@ class Product {
           'var' => 'isOutOfStock',
           'type' => TType::BOOL,
           ),
+        23 => array(
+          'var' => 'crawlerUpdatedAt',
+          'type' => TType::I64,
+          ),
         );
     }
     if (is_array($vals)) {
@@ -1118,6 +1126,9 @@ class Product {
       }
       if (isset($vals['isOutOfStock'])) {
         $this->isOutOfStock = $vals['isOutOfStock'];
+      }
+      if (isset($vals['crawlerUpdatedAt'])) {
+        $this->crawlerUpdatedAt = $vals['crawlerUpdatedAt'];
       }
     }
   }
@@ -1321,6 +1332,13 @@ class Product {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 23:
+          if ($ftype == TType::I64) {
+            $xfer += $input->readI64($this->crawlerUpdatedAt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -1481,6 +1499,11 @@ class Product {
     if ($this->isOutOfStock !== null) {
       $xfer += $output->writeFieldBegin('isOutOfStock', TType::BOOL, 22);
       $xfer += $output->writeBool($this->isOutOfStock);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->crawlerUpdatedAt !== null) {
+      $xfer += $output->writeFieldBegin('crawlerUpdatedAt', TType::I64, 23);
+      $xfer += $output->writeI64($this->crawlerUpdatedAt);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
