@@ -17,6 +17,189 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
+class GetSourceByIdRequest {
+  static $_TSPEC;
+
+  /**
+   * @var string
+   */
+  public $id = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'id',
+          'type' => TType::STRING,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetSourceByIdRequest';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->id);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetSourceByIdRequest');
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 1);
+      $xfer += $output->writeString($this->id);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class GetSourceByIdResponse {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Common\Error
+   */
+  public $error = null;
+  /**
+   * @var \Miczone\Thrift\Catalog\Source\Source
+   */
+  public $data = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'error',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Common\Error',
+          ),
+        2 => array(
+          'var' => 'data',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\Source\Source',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['error'])) {
+        $this->error = $vals['error'];
+      }
+      if (isset($vals['data'])) {
+        $this->data = $vals['data'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetSourceByIdResponse';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->error = new \Miczone\Thrift\Common\Error();
+            $xfer += $this->error->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRUCT) {
+            $this->data = new \Miczone\Thrift\Catalog\Source\Source();
+            $xfer += $this->data->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetSourceByIdResponse');
+    if ($this->error !== null) {
+      if (!is_object($this->error)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('error', TType::STRUCT, 1);
+      $xfer += $this->error->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->data !== null) {
+      if (!is_object($this->data)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('data', TType::STRUCT, 2);
+      $xfer += $this->data->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class Source {
   static $_TSPEC;
 
