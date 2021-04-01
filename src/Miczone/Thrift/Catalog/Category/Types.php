@@ -919,6 +919,268 @@ class MultiGetCategoryBySlugListResponse {
 
 }
 
+class GetCategoryMappingByIdRequest {
+  static $_TSPEC;
+
+  /**
+   * @var string
+   */
+  public $id = null;
+  /**
+   * @var int
+   */
+  public $childDepth = 1;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'id',
+          'type' => TType::STRING,
+          ),
+        2 => array(
+          'var' => 'childDepth',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['id'])) {
+        $this->id = $vals['id'];
+      }
+      if (isset($vals['childDepth'])) {
+        $this->childDepth = $vals['childDepth'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetCategoryMappingByIdRequest';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->id);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->childDepth);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetCategoryMappingByIdRequest');
+    if ($this->id !== null) {
+      $xfer += $output->writeFieldBegin('id', TType::STRING, 1);
+      $xfer += $output->writeString($this->id);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->childDepth !== null) {
+      $xfer += $output->writeFieldBegin('childDepth', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->childDepth);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class GetCategoryMappingByIdResponse {
+  static $_TSPEC;
+
+  /**
+   * @var \Miczone\Thrift\Common\Error
+   */
+  public $error = null;
+  /**
+   * @var array
+   */
+  public $data = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'error',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Common\Error',
+          ),
+        2 => array(
+          'var' => 'data',
+          'type' => TType::MAP,
+          'ktype' => TType::STRUCT,
+          'vtype' => TType::LST,
+          'key' => array(
+            'type' => TType::STRUCT,
+            'class' => '\Miczone\Thrift\Catalog\Category\SimpleCategory',
+          ),
+          'val' => array(
+            'type' => TType::LST,
+            'etype' => TType::STRUCT,
+            'elem' => array(
+              'type' => TType::STRUCT,
+              'class' => '\Miczone\Thrift\Catalog\OriginalCategory\SimpleOriginalCategory',
+              ),
+            ),
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['error'])) {
+        $this->error = $vals['error'];
+      }
+      if (isset($vals['data'])) {
+        $this->data = $vals['data'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetCategoryMappingByIdResponse';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->error = new \Miczone\Thrift\Common\Error();
+            $xfer += $this->error->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::MAP) {
+            $this->data = array();
+            $_size32 = 0;
+            $_ktype33 = 0;
+            $_vtype34 = 0;
+            $xfer += $input->readMapBegin($_ktype33, $_vtype34, $_size32);
+            for ($_i36 = 0; $_i36 < $_size32; ++$_i36)
+            {
+              $key37 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
+              $val38 = array();
+              $key37 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
+              $xfer += $key37->read($input);
+              $val38 = array();
+              $_size39 = 0;
+              $_etype42 = 0;
+              $xfer += $input->readListBegin($_etype42, $_size39);
+              for ($_i43 = 0; $_i43 < $_size39; ++$_i43)
+              {
+                $elem44 = null;
+                $elem44 = new \Miczone\Thrift\Catalog\OriginalCategory\SimpleOriginalCategory();
+                $xfer += $elem44->read($input);
+                $val38 []= $elem44;
+              }
+              $xfer += $input->readListEnd();
+              $this->data[$key37] = $val38;
+            }
+            $xfer += $input->readMapEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetCategoryMappingByIdResponse');
+    if ($this->error !== null) {
+      if (!is_object($this->error)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('error', TType::STRUCT, 1);
+      $xfer += $this->error->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->data !== null) {
+      if (!is_array($this->data)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('data', TType::MAP, 2);
+      {
+        $output->writeMapBegin(TType::STRUCT, TType::LST, count($this->data));
+        {
+          foreach ($this->data as $kiter45 => $viter46)
+          {
+            $xfer += $kiter45->write($output);
+            {
+              $output->writeListBegin(TType::STRUCT, count($viter46));
+              {
+                foreach ($viter46 as $iter47)
+                {
+                  $xfer += $iter47->write($output);
+                }
+              }
+              $output->writeListEnd();
+            }
+          }
+        }
+        $output->writeMapEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class Category {
   static $_TSPEC;
 
@@ -1186,15 +1448,15 @@ class Category {
         case 13:
           if ($ftype == TType::LST) {
             $this->originalCategoryList = array();
-            $_size32 = 0;
-            $_etype35 = 0;
-            $xfer += $input->readListBegin($_etype35, $_size32);
-            for ($_i36 = 0; $_i36 < $_size32; ++$_i36)
+            $_size48 = 0;
+            $_etype51 = 0;
+            $xfer += $input->readListBegin($_etype51, $_size48);
+            for ($_i52 = 0; $_i52 < $_size48; ++$_i52)
             {
-              $elem37 = null;
-              $elem37 = new \Miczone\Thrift\Catalog\OriginalCategory\SimpleOriginalCategory();
-              $xfer += $elem37->read($input);
-              $this->originalCategoryList []= $elem37;
+              $elem53 = null;
+              $elem53 = new \Miczone\Thrift\Catalog\OriginalCategory\SimpleOriginalCategory();
+              $xfer += $elem53->read($input);
+              $this->originalCategoryList []= $elem53;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -1282,9 +1544,9 @@ class Category {
       {
         $output->writeListBegin(TType::STRUCT, count($this->originalCategoryList));
         {
-          foreach ($this->originalCategoryList as $iter38)
+          foreach ($this->originalCategoryList as $iter54)
           {
-            $xfer += $iter38->write($output);
+            $xfer += $iter54->write($output);
           }
         }
         $output->writeListEnd();
