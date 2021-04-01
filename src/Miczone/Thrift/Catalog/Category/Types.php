@@ -929,7 +929,7 @@ class GetCategoryMappingByIdRequest {
   /**
    * @var int
    */
-  public $childDepth = 1;
+  public $childDepth = 0;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
