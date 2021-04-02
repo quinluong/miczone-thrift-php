@@ -1517,19 +1517,28 @@ class GetCategoryMappingByIdRequest {
 
 }
 
-class GetCategoryMappingByIdResponseDataMapValue {
+class GetCategoryMappingByIdResponseDataItem {
   static $_TSPEC;
 
   /**
+   * @var \Miczone\Thrift\Catalog\Category\SimpleCategory
+   */
+  public $category = null;
+  /**
    * @var \Miczone\Thrift\Catalog\OriginalCategory\SimpleOriginalCategory[]
    */
-  public $valueList = null;
+  public $originalCategoryList = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'valueList',
+          'var' => 'category',
+          'type' => TType::STRUCT,
+          'class' => '\Miczone\Thrift\Catalog\Category\SimpleCategory',
+          ),
+        2 => array(
+          'var' => 'originalCategoryList',
           'type' => TType::LST,
           'etype' => TType::STRUCT,
           'elem' => array(
@@ -1540,14 +1549,17 @@ class GetCategoryMappingByIdResponseDataMapValue {
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['valueList'])) {
-        $this->valueList = $vals['valueList'];
+      if (isset($vals['category'])) {
+        $this->category = $vals['category'];
+      }
+      if (isset($vals['originalCategoryList'])) {
+        $this->originalCategoryList = $vals['originalCategoryList'];
       }
     }
   }
 
   public function getName() {
-    return 'GetCategoryMappingByIdResponseDataMapValue';
+    return 'GetCategoryMappingByIdResponseDataItem';
   }
 
   public function read($input)
@@ -1566,8 +1578,16 @@ class GetCategoryMappingByIdResponseDataMapValue {
       switch ($fid)
       {
         case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->category = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
+            $xfer += $this->category->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
           if ($ftype == TType::LST) {
-            $this->valueList = array();
+            $this->originalCategoryList = array();
             $_size39 = 0;
             $_etype42 = 0;
             $xfer += $input->readListBegin($_etype42, $_size39);
@@ -1576,7 +1596,7 @@ class GetCategoryMappingByIdResponseDataMapValue {
               $elem44 = null;
               $elem44 = new \Miczone\Thrift\Catalog\OriginalCategory\SimpleOriginalCategory();
               $xfer += $elem44->read($input);
-              $this->valueList []= $elem44;
+              $this->originalCategoryList []= $elem44;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -1595,16 +1615,24 @@ class GetCategoryMappingByIdResponseDataMapValue {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('GetCategoryMappingByIdResponseDataMapValue');
-    if ($this->valueList !== null) {
-      if (!is_array($this->valueList)) {
+    $xfer += $output->writeStructBegin('GetCategoryMappingByIdResponseDataItem');
+    if ($this->category !== null) {
+      if (!is_object($this->category)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('valueList', TType::LST, 1);
+      $xfer += $output->writeFieldBegin('category', TType::STRUCT, 1);
+      $xfer += $this->category->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->originalCategoryList !== null) {
+      if (!is_array($this->originalCategoryList)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('originalCategoryList', TType::LST, 2);
       {
-        $output->writeListBegin(TType::STRUCT, count($this->valueList));
+        $output->writeListBegin(TType::STRUCT, count($this->originalCategoryList));
         {
-          foreach ($this->valueList as $iter45)
+          foreach ($this->originalCategoryList as $iter45)
           {
             $xfer += $iter45->write($output);
           }
@@ -1624,32 +1652,27 @@ class GetCategoryMappingByIdResponseData {
   static $_TSPEC;
 
   /**
-   * @var array
+   * @var \Miczone\Thrift\Catalog\Category\GetCategoryMappingByIdResponseDataItem[]
    */
-  public $dataMap = null;
+  public $itemList = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'dataMap',
-          'type' => TType::MAP,
-          'ktype' => TType::STRUCT,
-          'vtype' => TType::STRUCT,
-          'key' => array(
+          'var' => 'itemList',
+          'type' => TType::LST,
+          'etype' => TType::STRUCT,
+          'elem' => array(
             'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\Category\SimpleCategory',
-          ),
-          'val' => array(
-            'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\Category\GetCategoryMappingByIdResponseDataMapValue',
+            'class' => '\Miczone\Thrift\Catalog\Category\GetCategoryMappingByIdResponseDataItem',
             ),
           ),
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['dataMap'])) {
-        $this->dataMap = $vals['dataMap'];
+      if (isset($vals['itemList'])) {
+        $this->itemList = $vals['itemList'];
       }
     }
   }
@@ -1674,23 +1697,19 @@ class GetCategoryMappingByIdResponseData {
       switch ($fid)
       {
         case 1:
-          if ($ftype == TType::MAP) {
-            $this->dataMap = array();
+          if ($ftype == TType::LST) {
+            $this->itemList = array();
             $_size46 = 0;
-            $_ktype47 = 0;
-            $_vtype48 = 0;
-            $xfer += $input->readMapBegin($_ktype47, $_vtype48, $_size46);
+            $_etype49 = 0;
+            $xfer += $input->readListBegin($_etype49, $_size46);
             for ($_i50 = 0; $_i50 < $_size46; ++$_i50)
             {
-              $key51 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
-              $val52 = new \Miczone\Thrift\Catalog\Category\GetCategoryMappingByIdResponseDataMapValue();
-              $key51 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
-              $xfer += $key51->read($input);
-              $val52 = new \Miczone\Thrift\Catalog\Category\GetCategoryMappingByIdResponseDataMapValue();
-              $xfer += $val52->read($input);
-              $this->dataMap[$key51] = $val52;
+              $elem51 = null;
+              $elem51 = new \Miczone\Thrift\Catalog\Category\GetCategoryMappingByIdResponseDataItem();
+              $xfer += $elem51->read($input);
+              $this->itemList []= $elem51;
             }
-            $xfer += $input->readMapEnd();
+            $xfer += $input->readListEnd();
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -1708,21 +1727,20 @@ class GetCategoryMappingByIdResponseData {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('GetCategoryMappingByIdResponseData');
-    if ($this->dataMap !== null) {
-      if (!is_array($this->dataMap)) {
+    if ($this->itemList !== null) {
+      if (!is_array($this->itemList)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('dataMap', TType::MAP, 1);
+      $xfer += $output->writeFieldBegin('itemList', TType::LST, 1);
       {
-        $output->writeMapBegin(TType::STRUCT, TType::STRUCT, count($this->dataMap));
+        $output->writeListBegin(TType::STRUCT, count($this->itemList));
         {
-          foreach ($this->dataMap as $kiter53 => $viter54)
+          foreach ($this->itemList as $iter52)
           {
-            $xfer += $kiter53->write($output);
-            $xfer += $viter54->write($output);
+            $xfer += $iter52->write($output);
           }
         }
-        $output->writeMapEnd();
+        $output->writeListEnd();
       }
       $xfer += $output->writeFieldEnd();
     }
