@@ -6,7 +6,7 @@
   "prefer-stable": true,
   "require": {
     "php": ">=7.0",
-    "apache/thrift": "0.9.3"
+    "apache/thrift": "v0.14.1"
   },
   "autoload": {
     "classmap": [
