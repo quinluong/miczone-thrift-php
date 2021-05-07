@@ -22,7 +22,7 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'slug',
+            'var' => 'originalCategoryOriginalId',
             'isRequired' => true,
             'type' => TType::STRING,
         ),
@@ -36,7 +36,7 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
     /**
      * @var string
      */
-    public $slug = null;
+    public $originalCategoryOriginalId = null;
     /**
      * @var bool
      */
@@ -45,8 +45,8 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['slug'])) {
-                $this->slug = $vals['slug'];
+            if (isset($vals['originalCategoryOriginalId'])) {
+                $this->originalCategoryOriginalId = $vals['originalCategoryOriginalId'];
             }
             if (isset($vals['hasBreadcrumbList'])) {
                 $this->hasBreadcrumbList = $vals['hasBreadcrumbList'];
@@ -75,7 +75,7 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->slug);
+                        $xfer += $input->readString($this->originalCategoryOriginalId);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -101,9 +101,9 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('GetCategoryByOriginalCategoryOriginalIdRequest');
-        if ($this->slug !== null) {
-            $xfer += $output->writeFieldBegin('slug', TType::STRING, 1);
-            $xfer += $output->writeString($this->slug);
+        if ($this->originalCategoryOriginalId !== null) {
+            $xfer += $output->writeFieldBegin('originalCategoryOriginalId', TType::STRING, 1);
+            $xfer += $output->writeString($this->originalCategoryOriginalId);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->hasBreadcrumbList !== null) {
