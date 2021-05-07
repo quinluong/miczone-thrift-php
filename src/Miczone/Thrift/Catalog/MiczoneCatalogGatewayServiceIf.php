@@ -40,4 +40,10 @@ interface MiczoneCatalogGatewayServiceIf
      * @return \Miczone\Thrift\Catalog\Category\GetCategoryBySlugResponse
      */
     public function getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryBySlugRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdResponse
+     */
+    public function getCategoryByOriginalCategoryOriginalId(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdRequest $request);
 }
