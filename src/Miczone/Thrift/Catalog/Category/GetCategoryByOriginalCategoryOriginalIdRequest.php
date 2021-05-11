@@ -22,17 +22,35 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'originalCategoryOriginalId',
+            'var' => 'websiteCode',
             'isRequired' => true,
             'type' => TType::STRING,
         ),
         2 => array(
+            'var' => 'countryCode',
+            'isRequired' => true,
+            'type' => TType::STRING,
+        ),
+        3 => array(
+            'var' => 'originalCategoryOriginalId',
+            'isRequired' => true,
+            'type' => TType::STRING,
+        ),
+        4 => array(
             'var' => 'hasBreadcrumbList',
             'isRequired' => false,
             'type' => TType::BOOL,
         ),
     );
 
+    /**
+     * @var string
+     */
+    public $websiteCode = null;
+    /**
+     * @var string
+     */
+    public $countryCode = null;
     /**
      * @var string
      */
@@ -45,6 +63,12 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
+            if (isset($vals['websiteCode'])) {
+                $this->websiteCode = $vals['websiteCode'];
+            }
+            if (isset($vals['countryCode'])) {
+                $this->countryCode = $vals['countryCode'];
+            }
             if (isset($vals['originalCategoryOriginalId'])) {
                 $this->originalCategoryOriginalId = $vals['originalCategoryOriginalId'];
             }
@@ -75,12 +99,26 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->originalCategoryOriginalId);
+                        $xfer += $input->readString($this->websiteCode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->countryCode);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 3:
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->originalCategoryOriginalId);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 4:
                     if ($ftype == TType::BOOL) {
                         $xfer += $input->readBool($this->hasBreadcrumbList);
                     } else {
@@ -101,13 +139,23 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('GetCategoryByOriginalCategoryOriginalIdRequest');
+        if ($this->websiteCode !== null) {
+            $xfer += $output->writeFieldBegin('websiteCode', TType::STRING, 1);
+            $xfer += $output->writeString($this->websiteCode);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->countryCode !== null) {
+            $xfer += $output->writeFieldBegin('countryCode', TType::STRING, 2);
+            $xfer += $output->writeString($this->countryCode);
+            $xfer += $output->writeFieldEnd();
+        }
         if ($this->originalCategoryOriginalId !== null) {
-            $xfer += $output->writeFieldBegin('originalCategoryOriginalId', TType::STRING, 1);
+            $xfer += $output->writeFieldBegin('originalCategoryOriginalId', TType::STRING, 3);
             $xfer += $output->writeString($this->originalCategoryOriginalId);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->hasBreadcrumbList !== null) {
-            $xfer += $output->writeFieldBegin('hasBreadcrumbList', TType::BOOL, 2);
+            $xfer += $output->writeFieldBegin('hasBreadcrumbList', TType::BOOL, 4);
             $xfer += $output->writeBool($this->hasBreadcrumbList);
             $xfer += $output->writeFieldEnd();
         }
