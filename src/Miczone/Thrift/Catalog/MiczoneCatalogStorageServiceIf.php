@@ -54,10 +54,16 @@ interface MiczoneCatalogStorageServiceIf
     public function getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryBySlugRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdRequest $request
-     * @return \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdResponse
+     * @param \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryResponse
      */
-    public function getCategoryByOriginalCategoryOriginalId(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdRequest $request);
+    public function getCategoryByOriginalCategory(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse
+     */
+    public function getCategoryByProductSkuAndMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request

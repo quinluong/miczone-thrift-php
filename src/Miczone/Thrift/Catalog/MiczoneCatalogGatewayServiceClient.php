@@ -268,42 +268,42 @@ class MiczoneCatalogGatewayServiceClient implements \Miczone\Thrift\Catalog\Micz
         throw new \Exception("getCategoryBySlug failed: unknown result");
     }
 
-    public function getCategoryByOriginalCategoryOriginalId(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdRequest $request)
+    public function getCategoryByOriginalCategory(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request)
     {
-        $this->send_getCategoryByOriginalCategoryOriginalId($operationHandle, $request);
-        return $this->recv_getCategoryByOriginalCategoryOriginalId();
+        $this->send_getCategoryByOriginalCategory($operationHandle, $request);
+        return $this->recv_getCategoryByOriginalCategory();
     }
 
-    public function send_getCategoryByOriginalCategoryOriginalId(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdRequest $request)
+    public function send_getCategoryByOriginalCategory(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request)
     {
-        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByOriginalCategoryOriginalId_args();
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByOriginalCategory_args();
         $args->operationHandle = $operationHandle;
         $args->request = $request;
         $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
         if ($bin_accel) {
             thrift_protocol_write_binary(
                 $this->output_,
-                'getCategoryByOriginalCategoryOriginalId',
+                'getCategoryByOriginalCategory',
                 TMessageType::CALL,
                 $args,
                 $this->seqid_,
                 $this->output_->isStrictWrite()
             );
         } else {
-            $this->output_->writeMessageBegin('getCategoryByOriginalCategoryOriginalId', TMessageType::CALL, $this->seqid_);
+            $this->output_->writeMessageBegin('getCategoryByOriginalCategory', TMessageType::CALL, $this->seqid_);
             $args->write($this->output_);
             $this->output_->writeMessageEnd();
             $this->output_->getTransport()->flush();
         }
     }
 
-    public function recv_getCategoryByOriginalCategoryOriginalId()
+    public function recv_getCategoryByOriginalCategory()
     {
         $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
         if ($bin_accel) {
             $result = thrift_protocol_read_binary(
                 $this->input_,
-                '\Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByOriginalCategoryOriginalId_result',
+                '\Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByOriginalCategory_result',
                 $this->input_->isStrictRead()
             );
         } else {
@@ -318,13 +318,73 @@ class MiczoneCatalogGatewayServiceClient implements \Miczone\Thrift\Catalog\Micz
                 $this->input_->readMessageEnd();
                 throw $x;
             }
-            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByOriginalCategoryOriginalId_result();
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByOriginalCategory_result();
             $result->read($this->input_);
             $this->input_->readMessageEnd();
         }
         if ($result->success !== null) {
             return $result->success;
         }
-        throw new \Exception("getCategoryByOriginalCategoryOriginalId failed: unknown result");
+        throw new \Exception("getCategoryByOriginalCategory failed: unknown result");
+    }
+
+    public function getCategoryByProductSkuAndMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request)
+    {
+        $this->send_getCategoryByProductSkuAndMerchant($operationHandle, $request);
+        return $this->recv_getCategoryByProductSkuAndMerchant();
+    }
+
+    public function send_getCategoryByProductSkuAndMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request)
+    {
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_args();
+        $args->operationHandle = $operationHandle;
+        $args->request = $request;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'getCategoryByProductSkuAndMerchant',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('getCategoryByProductSkuAndMerchant', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_getCategoryByProductSkuAndMerchant()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("getCategoryByProductSkuAndMerchant failed: unknown result");
     }
 }

@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class GetCategoryByOriginalCategoryOriginalIdRequest
+class GetCategoryByOriginalCategoryRequest
 {
     static public $isValidate = false;
 
@@ -80,7 +80,7 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
 
     public function getName()
     {
-        return 'GetCategoryByOriginalCategoryOriginalIdRequest';
+        return 'GetCategoryByOriginalCategoryRequest';
     }
 
 
@@ -138,7 +138,7 @@ class GetCategoryByOriginalCategoryOriginalIdRequest
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('GetCategoryByOriginalCategoryOriginalIdRequest');
+        $xfer += $output->writeStructBegin('GetCategoryByOriginalCategoryRequest');
         if ($this->websiteCode !== null) {
             $xfer += $output->writeFieldBegin('websiteCode', TType::STRING, 1);
             $xfer += $output->writeString($this->websiteCode);

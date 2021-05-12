@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MiczoneCatalogStorageService_getCategoryByOriginalCategoryOriginalId_result
+class MiczoneCatalogStorageService_getCategoryByProductSkuAndMerchant_result
 {
     static public $isValidate = false;
 
@@ -25,12 +25,12 @@ class MiczoneCatalogStorageService_getCategoryByOriginalCategoryOriginalId_resul
             'var' => 'success',
             'isRequired' => false,
             'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdResponse',
+            'class' => '\Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse',
         ),
     );
 
     /**
-     * @var \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdResponse
+     * @var \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse
      */
     public $success = null;
 
@@ -45,7 +45,7 @@ class MiczoneCatalogStorageService_getCategoryByOriginalCategoryOriginalId_resul
 
     public function getName()
     {
-        return 'MiczoneCatalogStorageService_getCategoryByOriginalCategoryOriginalId_result';
+        return 'MiczoneCatalogStorageService_getCategoryByProductSkuAndMerchant_result';
     }
 
 
@@ -64,7 +64,7 @@ class MiczoneCatalogStorageService_getCategoryByOriginalCategoryOriginalId_resul
             switch ($fid) {
                 case 0:
                     if ($ftype == TType::STRUCT) {
-                        $this->success = new \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryOriginalIdResponse();
+                        $this->success = new \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse();
                         $xfer += $this->success->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
@@ -83,7 +83,7 @@ class MiczoneCatalogStorageService_getCategoryByOriginalCategoryOriginalId_resul
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_getCategoryByOriginalCategoryOriginalId_result');
+        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_getCategoryByProductSkuAndMerchant_result');
         if ($this->success !== null) {
             if (!is_object($this->success)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
