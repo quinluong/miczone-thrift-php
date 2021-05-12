@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result
+class MiczoneCatalogGatewayService_getCategoryByProductSkuAndOriginalMerchant_result
 {
     static public $isValidate = false;
 
@@ -25,12 +25,12 @@ class MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result
             'var' => 'success',
             'isRequired' => false,
             'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse',
+            'class' => '\Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantResponse',
         ),
     );
 
     /**
-     * @var \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse
+     * @var \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantResponse
      */
     public $success = null;
 
@@ -45,7 +45,7 @@ class MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result
 
     public function getName()
     {
-        return 'MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result';
+        return 'MiczoneCatalogGatewayService_getCategoryByProductSkuAndOriginalMerchant_result';
     }
 
 
@@ -64,7 +64,7 @@ class MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result
             switch ($fid) {
                 case 0:
                     if ($ftype == TType::STRUCT) {
-                        $this->success = new \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse();
+                        $this->success = new \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantResponse();
                         $xfer += $this->success->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
@@ -83,7 +83,7 @@ class MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result');
+        $xfer += $output->writeStructBegin('MiczoneCatalogGatewayService_getCategoryByProductSkuAndOriginalMerchant_result');
         if ($this->success !== null) {
             if (!is_object($this->success)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

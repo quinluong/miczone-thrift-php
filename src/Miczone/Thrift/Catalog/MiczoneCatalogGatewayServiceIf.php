@@ -48,8 +48,8 @@ interface MiczoneCatalogGatewayServiceIf
     public function getCategoryByOriginalCategory(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request
-     * @return \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantResponse
+     * @param \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantResponse
      */
-    public function getCategoryByProductSkuAndMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request);
+    public function getCategoryByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantRequest $request);
 }

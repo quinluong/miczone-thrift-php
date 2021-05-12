@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class GetCategoryByProductSkuAndMerchantRequest
+class GetCategoryByProductSkuAndOriginalMerchantRequest
 {
     static public $isValidate = false;
 
@@ -92,7 +92,7 @@ class GetCategoryByProductSkuAndMerchantRequest
 
     public function getName()
     {
-        return 'GetCategoryByProductSkuAndMerchantRequest';
+        return 'GetCategoryByProductSkuAndOriginalMerchantRequest';
     }
 
 
@@ -157,7 +157,7 @@ class GetCategoryByProductSkuAndMerchantRequest
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('GetCategoryByProductSkuAndMerchantRequest');
+        $xfer += $output->writeStructBegin('GetCategoryByProductSkuAndOriginalMerchantRequest');
         if ($this->websiteCode !== null) {
             $xfer += $output->writeFieldBegin('websiteCode', TType::STRING, 1);
             $xfer += $output->writeString($this->websiteCode);

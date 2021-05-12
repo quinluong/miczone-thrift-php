@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class GetCategoryByProductSkuAndMerchantResponse
+class GetCategoryByProductSkuAndOriginalMerchantResponse
 {
     static public $isValidate = false;
 
@@ -58,7 +58,7 @@ class GetCategoryByProductSkuAndMerchantResponse
 
     public function getName()
     {
-        return 'GetCategoryByProductSkuAndMerchantResponse';
+        return 'GetCategoryByProductSkuAndOriginalMerchantResponse';
     }
 
 
@@ -104,7 +104,7 @@ class GetCategoryByProductSkuAndMerchantResponse
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('GetCategoryByProductSkuAndMerchantResponse');
+        $xfer += $output->writeStructBegin('GetCategoryByProductSkuAndOriginalMerchantResponse');
         if ($this->error !== null) {
             if (!is_object($this->error)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

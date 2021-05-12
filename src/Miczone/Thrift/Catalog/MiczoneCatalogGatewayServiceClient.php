@@ -328,42 +328,42 @@ class MiczoneCatalogGatewayServiceClient implements \Miczone\Thrift\Catalog\Micz
         throw new \Exception("getCategoryByOriginalCategory failed: unknown result");
     }
 
-    public function getCategoryByProductSkuAndMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request)
+    public function getCategoryByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantRequest $request)
     {
-        $this->send_getCategoryByProductSkuAndMerchant($operationHandle, $request);
-        return $this->recv_getCategoryByProductSkuAndMerchant();
+        $this->send_getCategoryByProductSkuAndOriginalMerchant($operationHandle, $request);
+        return $this->recv_getCategoryByProductSkuAndOriginalMerchant();
     }
 
-    public function send_getCategoryByProductSkuAndMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndMerchantRequest $request)
+    public function send_getCategoryByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantRequest $request)
     {
-        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_args();
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndOriginalMerchant_args();
         $args->operationHandle = $operationHandle;
         $args->request = $request;
         $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
         if ($bin_accel) {
             thrift_protocol_write_binary(
                 $this->output_,
-                'getCategoryByProductSkuAndMerchant',
+                'getCategoryByProductSkuAndOriginalMerchant',
                 TMessageType::CALL,
                 $args,
                 $this->seqid_,
                 $this->output_->isStrictWrite()
             );
         } else {
-            $this->output_->writeMessageBegin('getCategoryByProductSkuAndMerchant', TMessageType::CALL, $this->seqid_);
+            $this->output_->writeMessageBegin('getCategoryByProductSkuAndOriginalMerchant', TMessageType::CALL, $this->seqid_);
             $args->write($this->output_);
             $this->output_->writeMessageEnd();
             $this->output_->getTransport()->flush();
         }
     }
 
-    public function recv_getCategoryByProductSkuAndMerchant()
+    public function recv_getCategoryByProductSkuAndOriginalMerchant()
     {
         $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
         if ($bin_accel) {
             $result = thrift_protocol_read_binary(
                 $this->input_,
-                '\Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result',
+                '\Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndOriginalMerchant_result',
                 $this->input_->isStrictRead()
             );
         } else {
@@ -378,13 +378,13 @@ class MiczoneCatalogGatewayServiceClient implements \Miczone\Thrift\Catalog\Micz
                 $this->input_->readMessageEnd();
                 throw $x;
             }
-            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndMerchant_result();
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogGatewayService_getCategoryByProductSkuAndOriginalMerchant_result();
             $result->read($this->input_);
             $this->input_->readMessageEnd();
         }
         if ($result->success !== null) {
             return $result->success;
         }
-        throw new \Exception("getCategoryByProductSkuAndMerchant failed: unknown result");
+        throw new \Exception("getCategoryByProductSkuAndOriginalMerchant failed: unknown result");
     }
 }
