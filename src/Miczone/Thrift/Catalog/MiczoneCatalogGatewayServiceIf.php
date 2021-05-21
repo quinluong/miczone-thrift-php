@@ -52,4 +52,10 @@ interface MiczoneCatalogGatewayServiceIf
      * @return \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantResponse
      */
     public function getCategoryByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Breadcrumb\MultiGetBreadcrumbListByProductSkuAndOriginalMerchantRequest $request
+     * @return \Miczone\Thrift\Catalog\Breadcrumb\MultiGetBreadcrumbListByProductSkuAndOriginalMerchantResponse
+     */
+    public function multiGetBreadcrumbListByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Breadcrumb\MultiGetBreadcrumbListByProductSkuAndOriginalMerchantRequest $request);
 }

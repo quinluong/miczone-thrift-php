@@ -48,10 +48,22 @@ interface MiczoneCatalogStorageServiceIf
     public function getCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByIdRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListResponse
+     */
+    public function multiGetCategoryByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\GetCategoryBySlugRequest $request
      * @return \Miczone\Thrift\Catalog\Category\GetCategoryBySlugResponse
      */
     public function getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryBySlugRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListResponse
+     */
+    public function multiGetCategoryBySlugList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request
@@ -64,18 +76,6 @@ interface MiczoneCatalogStorageServiceIf
      * @return \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantResponse
      */
     public function getCategoryByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByProductSkuAndOriginalMerchantRequest $request);
-    /**
-     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request
-     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListResponse
-     */
-    public function multiGetCategoryByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request);
-    /**
-     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request
-     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListResponse
-     */
-    public function multiGetCategoryBySlugList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\GetCategoryMappingByIdRequest $request
@@ -100,4 +100,10 @@ interface MiczoneCatalogStorageServiceIf
      * @return \Miczone\Thrift\Catalog\Source\GetSourceByIdResponse
      */
     public function getSourceById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Source\GetSourceByIdRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Breadcrumb\MultiGetBreadcrumbListByProductSkuAndOriginalMerchantRequest $request
+     * @return \Miczone\Thrift\Catalog\Breadcrumb\MultiGetBreadcrumbListByProductSkuAndOriginalMerchantResponse
+     */
+    public function multiGetBreadcrumbListByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Breadcrumb\MultiGetBreadcrumbListByProductSkuAndOriginalMerchantRequest $request);
 }
