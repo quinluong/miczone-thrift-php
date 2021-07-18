@@ -30,6 +30,12 @@ interface MiczoneCatalogGatewayServiceIf
     public function searchProduct(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Search\SearchProductRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Product\GetMatrixProductRequest $request
+     * @return \Miczone\Thrift\Catalog\Product\GetMatrixProductResponse
+     */
+    public function getMatrixProduct(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetMatrixProductRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\GetCategoryByIdRequest $request
      * @return \Miczone\Thrift\Catalog\Category\GetCategoryByIdResponse
      */

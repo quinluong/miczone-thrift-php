@@ -36,10 +36,28 @@ interface MiczoneCatalogStorageServiceIf
     public function multiGetProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdListRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request
+     * @return \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListResponse
+     */
+    public function multiGetSimpleProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Product\GetSliceProductRequest $request
      * @return \Miczone\Thrift\Catalog\Product\GetSliceProductResponse
      */
     public function getSliceProduct(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetSliceProductRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Product\MultiGetProductTranslatedNameByProductSkuAndOriginalMerchantRequest $request
+     * @return \Miczone\Thrift\Catalog\Product\MultiGetProductTranslatedNameByProductSkuAndOriginalMerchantResponse
+     */
+    public function multiGetProductTranslatedNameByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductTranslatedNameByProductSkuAndOriginalMerchantRequest $request);
+    /**
+     * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
+     * @param \Miczone\Thrift\Catalog\Product\GetProductIdByProductSkuAndOriginalMerchantRequest $request
+     * @return \Miczone\Thrift\Catalog\Product\GetProductIdByProductSkuAndOriginalMerchantResponse
+     */
+    public function getProductIdByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetProductIdByProductSkuAndOriginalMerchantRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\GetCategoryByIdRequest $request

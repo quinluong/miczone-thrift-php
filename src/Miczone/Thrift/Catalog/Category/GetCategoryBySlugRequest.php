@@ -31,6 +31,11 @@ class GetCategoryBySlugRequest
             'isRequired' => false,
             'type' => TType::BOOL,
         ),
+        3 => array(
+            'var' => 'hasOriginalCategoryList',
+            'isRequired' => false,
+            'type' => TType::BOOL,
+        ),
     );
 
     /**
@@ -41,6 +46,10 @@ class GetCategoryBySlugRequest
      * @var bool
      */
     public $hasBreadcrumbList = null;
+    /**
+     * @var bool
+     */
+    public $hasOriginalCategoryList = null;
 
     public function __construct($vals = null)
     {
@@ -50,6 +59,9 @@ class GetCategoryBySlugRequest
             }
             if (isset($vals['hasBreadcrumbList'])) {
                 $this->hasBreadcrumbList = $vals['hasBreadcrumbList'];
+            }
+            if (isset($vals['hasOriginalCategoryList'])) {
+                $this->hasOriginalCategoryList = $vals['hasOriginalCategoryList'];
             }
         }
     }
@@ -87,6 +99,13 @@ class GetCategoryBySlugRequest
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 3:
+                    if ($ftype == TType::BOOL) {
+                        $xfer += $input->readBool($this->hasOriginalCategoryList);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -109,6 +128,11 @@ class GetCategoryBySlugRequest
         if ($this->hasBreadcrumbList !== null) {
             $xfer += $output->writeFieldBegin('hasBreadcrumbList', TType::BOOL, 2);
             $xfer += $output->writeBool($this->hasBreadcrumbList);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->hasOriginalCategoryList !== null) {
+            $xfer += $output->writeFieldBegin('hasOriginalCategoryList', TType::BOOL, 3);
+            $xfer += $output->writeBool($this->hasOriginalCategoryList);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

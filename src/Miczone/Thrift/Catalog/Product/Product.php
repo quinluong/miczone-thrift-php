@@ -378,14 +378,14 @@ class Product
                 case 6:
                     if ($ftype == TType::LST) {
                         $this->categoryList = array();
-                        $_size23 = 0;
-                        $_etype26 = 0;
-                        $xfer += $input->readListBegin($_etype26, $_size23);
-                        for ($_i27 = 0; $_i27 < $_size23; ++$_i27) {
-                            $elem28 = null;
-                            $elem28 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
-                            $xfer += $elem28->read($input);
-                            $this->categoryList []= $elem28;
+                        $_size64 = 0;
+                        $_etype67 = 0;
+                        $xfer += $input->readListBegin($_etype67, $_size64);
+                        for ($_i68 = 0; $_i68 < $_size64; ++$_i68) {
+                            $elem69 = null;
+                            $elem69 = new \Miczone\Thrift\Catalog\Category\SimpleCategory();
+                            $xfer += $elem69->read($input);
+                            $this->categoryList []= $elem69;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -454,13 +454,13 @@ class Product
                 case 15:
                     if ($ftype == TType::LST) {
                         $this->imageList = array();
-                        $_size29 = 0;
-                        $_etype32 = 0;
-                        $xfer += $input->readListBegin($_etype32, $_size29);
-                        for ($_i33 = 0; $_i33 < $_size29; ++$_i33) {
-                            $elem34 = null;
-                            $xfer += $input->readString($elem34);
-                            $this->imageList []= $elem34;
+                        $_size70 = 0;
+                        $_etype73 = 0;
+                        $xfer += $input->readListBegin($_etype73, $_size70);
+                        for ($_i74 = 0; $_i74 < $_size70; ++$_i74) {
+                            $elem75 = null;
+                            $xfer += $input->readString($elem75);
+                            $this->imageList []= $elem75;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -572,8 +572,8 @@ class Product
             }
             $xfer += $output->writeFieldBegin('categoryList', TType::LST, 6);
             $output->writeListBegin(TType::STRUCT, count($this->categoryList));
-            foreach ($this->categoryList as $iter35) {
-                $xfer += $iter35->write($output);
+            foreach ($this->categoryList as $iter76) {
+                $xfer += $iter76->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
@@ -633,8 +633,8 @@ class Product
             }
             $xfer += $output->writeFieldBegin('imageList', TType::LST, 15);
             $output->writeListBegin(TType::STRING, count($this->imageList));
-            foreach ($this->imageList as $iter36) {
-                $xfer += $output->writeString($iter36);
+            foreach ($this->imageList as $iter77) {
+                $xfer += $output->writeString($iter77);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

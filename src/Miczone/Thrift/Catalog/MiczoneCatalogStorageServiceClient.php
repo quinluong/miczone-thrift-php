@@ -208,6 +208,66 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
         throw new \Exception("multiGetProductByIdList failed: unknown result");
     }
 
+    public function multiGetSimpleProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request)
+    {
+        $this->send_multiGetSimpleProductByIdList($operationHandle, $request);
+        return $this->recv_multiGetSimpleProductByIdList();
+    }
+
+    public function send_multiGetSimpleProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request)
+    {
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args();
+        $args->operationHandle = $operationHandle;
+        $args->request = $request;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'multiGetSimpleProductByIdList',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('multiGetSimpleProductByIdList', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_multiGetSimpleProductByIdList()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("multiGetSimpleProductByIdList failed: unknown result");
+    }
+
     public function getSliceProduct(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetSliceProductRequest $request)
     {
         $this->send_getSliceProduct($operationHandle, $request);
@@ -266,6 +326,126 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
             return $result->success;
         }
         throw new \Exception("getSliceProduct failed: unknown result");
+    }
+
+    public function multiGetProductTranslatedNameByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductTranslatedNameByProductSkuAndOriginalMerchantRequest $request)
+    {
+        $this->send_multiGetProductTranslatedNameByProductSkuAndOriginalMerchant($operationHandle, $request);
+        return $this->recv_multiGetProductTranslatedNameByProductSkuAndOriginalMerchant();
+    }
+
+    public function send_multiGetProductTranslatedNameByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductTranslatedNameByProductSkuAndOriginalMerchantRequest $request)
+    {
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductTranslatedNameByProductSkuAndOriginalMerchant_args();
+        $args->operationHandle = $operationHandle;
+        $args->request = $request;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'multiGetProductTranslatedNameByProductSkuAndOriginalMerchant',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('multiGetProductTranslatedNameByProductSkuAndOriginalMerchant', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_multiGetProductTranslatedNameByProductSkuAndOriginalMerchant()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductTranslatedNameByProductSkuAndOriginalMerchant_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductTranslatedNameByProductSkuAndOriginalMerchant_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("multiGetProductTranslatedNameByProductSkuAndOriginalMerchant failed: unknown result");
+    }
+
+    public function getProductIdByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetProductIdByProductSkuAndOriginalMerchantRequest $request)
+    {
+        $this->send_getProductIdByProductSkuAndOriginalMerchant($operationHandle, $request);
+        return $this->recv_getProductIdByProductSkuAndOriginalMerchant();
+    }
+
+    public function send_getProductIdByProductSkuAndOriginalMerchant(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetProductIdByProductSkuAndOriginalMerchantRequest $request)
+    {
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_getProductIdByProductSkuAndOriginalMerchant_args();
+        $args->operationHandle = $operationHandle;
+        $args->request = $request;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'getProductIdByProductSkuAndOriginalMerchant',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('getProductIdByProductSkuAndOriginalMerchant', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_getProductIdByProductSkuAndOriginalMerchant()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_getProductIdByProductSkuAndOriginalMerchant_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_getProductIdByProductSkuAndOriginalMerchant_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("getProductIdByProductSkuAndOriginalMerchant failed: unknown result");
     }
 
     public function getCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByIdRequest $request)
