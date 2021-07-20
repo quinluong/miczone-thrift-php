@@ -148,42 +148,42 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
         throw new \Exception("getProductById failed: unknown result");
     }
 
-    public function multiGetProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdListRequest $request)
+    public function multiGetProductById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdRequest $request)
     {
-        $this->send_multiGetProductByIdList($operationHandle, $request);
-        return $this->recv_multiGetProductByIdList();
+        $this->send_multiGetProductById($operationHandle, $request);
+        return $this->recv_multiGetProductById();
     }
 
-    public function send_multiGetProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdListRequest $request)
+    public function send_multiGetProductById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdRequest $request)
     {
-        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductByIdList_args();
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductById_args();
         $args->operationHandle = $operationHandle;
         $args->request = $request;
         $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
         if ($bin_accel) {
             thrift_protocol_write_binary(
                 $this->output_,
-                'multiGetProductByIdList',
+                'multiGetProductById',
                 TMessageType::CALL,
                 $args,
                 $this->seqid_,
                 $this->output_->isStrictWrite()
             );
         } else {
-            $this->output_->writeMessageBegin('multiGetProductByIdList', TMessageType::CALL, $this->seqid_);
+            $this->output_->writeMessageBegin('multiGetProductById', TMessageType::CALL, $this->seqid_);
             $args->write($this->output_);
             $this->output_->writeMessageEnd();
             $this->output_->getTransport()->flush();
         }
     }
 
-    public function recv_multiGetProductByIdList()
+    public function recv_multiGetProductById()
     {
         $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
         if ($bin_accel) {
             $result = thrift_protocol_read_binary(
                 $this->input_,
-                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductByIdList_result',
+                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductById_result',
                 $this->input_->isStrictRead()
             );
         } else {
@@ -198,52 +198,52 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
                 $this->input_->readMessageEnd();
                 throw $x;
             }
-            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductByIdList_result();
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetProductById_result();
             $result->read($this->input_);
             $this->input_->readMessageEnd();
         }
         if ($result->success !== null) {
             return $result->success;
         }
-        throw new \Exception("multiGetProductByIdList failed: unknown result");
+        throw new \Exception("multiGetProductById failed: unknown result");
     }
 
-    public function multiGetSimpleProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request)
+    public function multiGetSimpleProductById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdRequest $request)
     {
-        $this->send_multiGetSimpleProductByIdList($operationHandle, $request);
-        return $this->recv_multiGetSimpleProductByIdList();
+        $this->send_multiGetSimpleProductById($operationHandle, $request);
+        return $this->recv_multiGetSimpleProductById();
     }
 
-    public function send_multiGetSimpleProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request)
+    public function send_multiGetSimpleProductById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdRequest $request)
     {
-        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args();
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductById_args();
         $args->operationHandle = $operationHandle;
         $args->request = $request;
         $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
         if ($bin_accel) {
             thrift_protocol_write_binary(
                 $this->output_,
-                'multiGetSimpleProductByIdList',
+                'multiGetSimpleProductById',
                 TMessageType::CALL,
                 $args,
                 $this->seqid_,
                 $this->output_->isStrictWrite()
             );
         } else {
-            $this->output_->writeMessageBegin('multiGetSimpleProductByIdList', TMessageType::CALL, $this->seqid_);
+            $this->output_->writeMessageBegin('multiGetSimpleProductById', TMessageType::CALL, $this->seqid_);
             $args->write($this->output_);
             $this->output_->writeMessageEnd();
             $this->output_->getTransport()->flush();
         }
     }
 
-    public function recv_multiGetSimpleProductByIdList()
+    public function recv_multiGetSimpleProductById()
     {
         $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
         if ($bin_accel) {
             $result = thrift_protocol_read_binary(
                 $this->input_,
-                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result',
+                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductById_result',
                 $this->input_->isStrictRead()
             );
         } else {
@@ -258,14 +258,14 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
                 $this->input_->readMessageEnd();
                 throw $x;
             }
-            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result();
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetSimpleProductById_result();
             $result->read($this->input_);
             $this->input_->readMessageEnd();
         }
         if ($result->success !== null) {
             return $result->success;
         }
-        throw new \Exception("multiGetSimpleProductByIdList failed: unknown result");
+        throw new \Exception("multiGetSimpleProductById failed: unknown result");
     }
 
     public function getSliceProduct(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetSliceProductRequest $request)
@@ -508,42 +508,42 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
         throw new \Exception("getCategoryById failed: unknown result");
     }
 
-    public function multiGetCategoryByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request)
+    public function multiGetCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdRequest $request)
     {
-        $this->send_multiGetCategoryByIdList($operationHandle, $request);
-        return $this->recv_multiGetCategoryByIdList();
+        $this->send_multiGetCategoryById($operationHandle, $request);
+        return $this->recv_multiGetCategoryById();
     }
 
-    public function send_multiGetCategoryByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request)
+    public function send_multiGetCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdRequest $request)
     {
-        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryByIdList_args();
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryById_args();
         $args->operationHandle = $operationHandle;
         $args->request = $request;
         $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
         if ($bin_accel) {
             thrift_protocol_write_binary(
                 $this->output_,
-                'multiGetCategoryByIdList',
+                'multiGetCategoryById',
                 TMessageType::CALL,
                 $args,
                 $this->seqid_,
                 $this->output_->isStrictWrite()
             );
         } else {
-            $this->output_->writeMessageBegin('multiGetCategoryByIdList', TMessageType::CALL, $this->seqid_);
+            $this->output_->writeMessageBegin('multiGetCategoryById', TMessageType::CALL, $this->seqid_);
             $args->write($this->output_);
             $this->output_->writeMessageEnd();
             $this->output_->getTransport()->flush();
         }
     }
 
-    public function recv_multiGetCategoryByIdList()
+    public function recv_multiGetCategoryById()
     {
         $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
         if ($bin_accel) {
             $result = thrift_protocol_read_binary(
                 $this->input_,
-                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryByIdList_result',
+                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryById_result',
                 $this->input_->isStrictRead()
             );
         } else {
@@ -558,14 +558,14 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
                 $this->input_->readMessageEnd();
                 throw $x;
             }
-            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryByIdList_result();
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryById_result();
             $result->read($this->input_);
             $this->input_->readMessageEnd();
         }
         if ($result->success !== null) {
             return $result->success;
         }
-        throw new \Exception("multiGetCategoryByIdList failed: unknown result");
+        throw new \Exception("multiGetCategoryById failed: unknown result");
     }
 
     public function getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryBySlugRequest $request)
@@ -628,42 +628,42 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
         throw new \Exception("getCategoryBySlug failed: unknown result");
     }
 
-    public function multiGetCategoryBySlugList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request)
+    public function multiGetCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugRequest $request)
     {
-        $this->send_multiGetCategoryBySlugList($operationHandle, $request);
-        return $this->recv_multiGetCategoryBySlugList();
+        $this->send_multiGetCategoryBySlug($operationHandle, $request);
+        return $this->recv_multiGetCategoryBySlug();
     }
 
-    public function send_multiGetCategoryBySlugList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request)
+    public function send_multiGetCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugRequest $request)
     {
-        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryBySlugList_args();
+        $args = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryBySlug_args();
         $args->operationHandle = $operationHandle;
         $args->request = $request;
         $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
         if ($bin_accel) {
             thrift_protocol_write_binary(
                 $this->output_,
-                'multiGetCategoryBySlugList',
+                'multiGetCategoryBySlug',
                 TMessageType::CALL,
                 $args,
                 $this->seqid_,
                 $this->output_->isStrictWrite()
             );
         } else {
-            $this->output_->writeMessageBegin('multiGetCategoryBySlugList', TMessageType::CALL, $this->seqid_);
+            $this->output_->writeMessageBegin('multiGetCategoryBySlug', TMessageType::CALL, $this->seqid_);
             $args->write($this->output_);
             $this->output_->writeMessageEnd();
             $this->output_->getTransport()->flush();
         }
     }
 
-    public function recv_multiGetCategoryBySlugList()
+    public function recv_multiGetCategoryBySlug()
     {
         $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
         if ($bin_accel) {
             $result = thrift_protocol_read_binary(
                 $this->input_,
-                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryBySlugList_result',
+                '\Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryBySlug_result',
                 $this->input_->isStrictRead()
             );
         } else {
@@ -678,14 +678,14 @@ class MiczoneCatalogStorageServiceClient implements \Miczone\Thrift\Catalog\Micz
                 $this->input_->readMessageEnd();
                 throw $x;
             }
-            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryBySlugList_result();
+            $result = new \Miczone\Thrift\Catalog\MiczoneCatalogStorageService_multiGetCategoryBySlug_result();
             $result->read($this->input_);
             $this->input_->readMessageEnd();
         }
         if ($result->success !== null) {
             return $result->success;
         }
-        throw new \Exception("multiGetCategoryBySlugList failed: unknown result");
+        throw new \Exception("multiGetCategoryBySlug failed: unknown result");
     }
 
     public function getCategoryByOriginalCategory(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request)

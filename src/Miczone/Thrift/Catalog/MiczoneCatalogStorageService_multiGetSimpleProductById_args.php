@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args
+class MiczoneCatalogStorageService_multiGetSimpleProductById_args
 {
     static public $isValidate = false;
 
@@ -31,7 +31,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args
             'var' => 'request',
             'isRequired' => false,
             'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest',
+            'class' => '\Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdRequest',
         ),
     );
 
@@ -40,7 +40,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args
      */
     public $operationHandle = null;
     /**
-     * @var \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest
+     * @var \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdRequest
      */
     public $request = null;
 
@@ -58,7 +58,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args
 
     public function getName()
     {
-        return 'MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args';
+        return 'MiczoneCatalogStorageService_multiGetSimpleProductById_args';
     }
 
 
@@ -85,7 +85,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args
                     break;
                 case 2:
                     if ($ftype == TType::STRUCT) {
-                        $this->request = new \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest();
+                        $this->request = new \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdRequest();
                         $xfer += $this->request->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
@@ -104,7 +104,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_multiGetSimpleProductByIdList_args');
+        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_multiGetSimpleProductById_args');
         if ($this->operationHandle !== null) {
             if (!is_object($this->operationHandle)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

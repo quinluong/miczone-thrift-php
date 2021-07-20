@@ -30,16 +30,16 @@ interface MiczoneCatalogStorageServiceIf
     public function getProductById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\GetProductByIdRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Product\MultiGetProductByIdListRequest $request
-     * @return \Miczone\Thrift\Catalog\Product\MultiGetProductByIdListResponse
+     * @param \Miczone\Thrift\Catalog\Product\MultiGetProductByIdRequest $request
+     * @return \Miczone\Thrift\Catalog\Product\MultiGetProductByIdResponse
      */
-    public function multiGetProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdListRequest $request);
+    public function multiGetProductById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetProductByIdRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request
-     * @return \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListResponse
+     * @param \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdRequest $request
+     * @return \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdResponse
      */
-    public function multiGetSimpleProductByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListRequest $request);
+    public function multiGetSimpleProductById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Product\GetSliceProductRequest $request
@@ -66,10 +66,10 @@ interface MiczoneCatalogStorageServiceIf
     public function getCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryByIdRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request
-     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListResponse
+     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdResponse
      */
-    public function multiGetCategoryByIdList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest $request);
+    public function multiGetCategoryById(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\GetCategoryBySlugRequest $request
@@ -78,10 +78,10 @@ interface MiczoneCatalogStorageServiceIf
     public function getCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\GetCategoryBySlugRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
-     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request
-     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListResponse
+     * @param \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugRequest $request
+     * @return \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugResponse
      */
-    public function multiGetCategoryBySlugList(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugListRequest $request);
+    public function multiGetCategoryBySlug(\Miczone\Thrift\Common\OperationHandle $operationHandle, \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugRequest $request);
     /**
      * @param \Miczone\Thrift\Common\OperationHandle $operationHandle
      * @param \Miczone\Thrift\Catalog\Category\GetCategoryByOriginalCategoryRequest $request

@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MultiGetCategoryByIdListResponse
+class MultiGetCategoryByIdResponse
 {
     static public $isValidate = false;
 
@@ -79,7 +79,7 @@ class MultiGetCategoryByIdListResponse
 
     public function getName()
     {
-        return 'MultiGetCategoryByIdListResponse';
+        return 'MultiGetCategoryByIdResponse';
     }
 
 
@@ -145,7 +145,7 @@ class MultiGetCategoryByIdListResponse
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MultiGetCategoryByIdListResponse');
+        $xfer += $output->writeStructBegin('MultiGetCategoryByIdResponse');
         if ($this->error !== null) {
             if (!is_object($this->error)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

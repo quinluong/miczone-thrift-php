@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MiczoneCatalogStorageService_multiGetCategoryByIdList_args
+class MiczoneCatalogStorageService_multiGetCategoryBySlug_args
 {
     static public $isValidate = false;
 
@@ -31,7 +31,7 @@ class MiczoneCatalogStorageService_multiGetCategoryByIdList_args
             'var' => 'request',
             'isRequired' => false,
             'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest',
+            'class' => '\Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugRequest',
         ),
     );
 
@@ -40,7 +40,7 @@ class MiczoneCatalogStorageService_multiGetCategoryByIdList_args
      */
     public $operationHandle = null;
     /**
-     * @var \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest
+     * @var \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugRequest
      */
     public $request = null;
 
@@ -58,7 +58,7 @@ class MiczoneCatalogStorageService_multiGetCategoryByIdList_args
 
     public function getName()
     {
-        return 'MiczoneCatalogStorageService_multiGetCategoryByIdList_args';
+        return 'MiczoneCatalogStorageService_multiGetCategoryBySlug_args';
     }
 
 
@@ -85,7 +85,7 @@ class MiczoneCatalogStorageService_multiGetCategoryByIdList_args
                     break;
                 case 2:
                     if ($ftype == TType::STRUCT) {
-                        $this->request = new \Miczone\Thrift\Catalog\Category\MultiGetCategoryByIdListRequest();
+                        $this->request = new \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugRequest();
                         $xfer += $this->request->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
@@ -104,7 +104,7 @@ class MiczoneCatalogStorageService_multiGetCategoryByIdList_args
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_multiGetCategoryByIdList_args');
+        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_multiGetCategoryBySlug_args');
         if ($this->operationHandle !== null) {
             if (!is_object($this->operationHandle)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result
+class MiczoneCatalogStorageService_multiGetCategoryBySlug_result
 {
     static public $isValidate = false;
 
@@ -25,12 +25,12 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result
             'var' => 'success',
             'isRequired' => false,
             'type' => TType::STRUCT,
-            'class' => '\Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListResponse',
+            'class' => '\Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugResponse',
         ),
     );
 
     /**
-     * @var \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListResponse
+     * @var \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugResponse
      */
     public $success = null;
 
@@ -45,7 +45,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result
 
     public function getName()
     {
-        return 'MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result';
+        return 'MiczoneCatalogStorageService_multiGetCategoryBySlug_result';
     }
 
 
@@ -64,7 +64,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result
             switch ($fid) {
                 case 0:
                     if ($ftype == TType::STRUCT) {
-                        $this->success = new \Miczone\Thrift\Catalog\Product\MultiGetSimpleProductByIdListResponse();
+                        $this->success = new \Miczone\Thrift\Catalog\Category\MultiGetCategoryBySlugResponse();
                         $xfer += $this->success->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
@@ -83,7 +83,7 @@ class MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_multiGetSimpleProductByIdList_result');
+        $xfer += $output->writeStructBegin('MiczoneCatalogStorageService_multiGetCategoryBySlug_result');
         if ($this->success !== null) {
             if (!is_object($this->success)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

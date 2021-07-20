@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MultiGetSimpleProductByIdListResponse
+class MultiGetSimpleProductByIdResponse
 {
     static public $isValidate = false;
 
@@ -79,7 +79,7 @@ class MultiGetSimpleProductByIdListResponse
 
     public function getName()
     {
-        return 'MultiGetSimpleProductByIdListResponse';
+        return 'MultiGetSimpleProductByIdResponse';
     }
 
 
@@ -145,7 +145,7 @@ class MultiGetSimpleProductByIdListResponse
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MultiGetSimpleProductByIdListResponse');
+        $xfer += $output->writeStructBegin('MultiGetSimpleProductByIdResponse');
         if ($this->error !== null) {
             if (!is_object($this->error)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);

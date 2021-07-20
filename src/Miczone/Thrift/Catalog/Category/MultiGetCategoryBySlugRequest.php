@@ -16,7 +16,7 @@ use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
-class MultiGetCategoryBySlugListRequest
+class MultiGetCategoryBySlugRequest
 {
     static public $isValidate = false;
 
@@ -48,7 +48,7 @@ class MultiGetCategoryBySlugListRequest
 
     public function getName()
     {
-        return 'MultiGetCategoryBySlugListRequest';
+        return 'MultiGetCategoryBySlugRequest';
     }
 
 
@@ -94,7 +94,7 @@ class MultiGetCategoryBySlugListRequest
     public function write($output)
     {
         $xfer = 0;
-        $xfer += $output->writeStructBegin('MultiGetCategoryBySlugListRequest');
+        $xfer += $output->writeStructBegin('MultiGetCategoryBySlugRequest');
         if ($this->slugList !== null) {
             if (!is_array($this->slugList)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
