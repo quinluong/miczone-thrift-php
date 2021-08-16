@@ -36,11 +36,6 @@ class GetMatrixProductRequest
             'isRequired' => true,
             'type' => TType::STRING,
         ),
-        4 => array(
-            'var' => 'originalMerchantOriginalId',
-            'isRequired' => true,
-            'type' => TType::STRING,
-        ),
     );
 
     /**
@@ -55,10 +50,6 @@ class GetMatrixProductRequest
      * @var string
      */
     public $productSku = null;
-    /**
-     * @var string
-     */
-    public $originalMerchantOriginalId = null;
 
     public function __construct($vals = null)
     {
@@ -71,9 +62,6 @@ class GetMatrixProductRequest
             }
             if (isset($vals['productSku'])) {
                 $this->productSku = $vals['productSku'];
-            }
-            if (isset($vals['originalMerchantOriginalId'])) {
-                $this->originalMerchantOriginalId = $vals['originalMerchantOriginalId'];
             }
         }
     }
@@ -118,13 +106,6 @@ class GetMatrixProductRequest
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 4:
-                    if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->originalMerchantOriginalId);
-                    } else {
-                        $xfer += $input->skip($ftype);
-                    }
-                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -152,11 +133,6 @@ class GetMatrixProductRequest
         if ($this->productSku !== null) {
             $xfer += $output->writeFieldBegin('productSku', TType::STRING, 3);
             $xfer += $output->writeString($this->productSku);
-            $xfer += $output->writeFieldEnd();
-        }
-        if ($this->originalMerchantOriginalId !== null) {
-            $xfer += $output->writeFieldBegin('originalMerchantOriginalId', TType::STRING, 4);
-            $xfer += $output->writeString($this->originalMerchantOriginalId);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

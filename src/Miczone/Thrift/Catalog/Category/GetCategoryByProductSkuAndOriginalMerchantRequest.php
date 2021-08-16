@@ -38,7 +38,7 @@ class GetCategoryByProductSkuAndOriginalMerchantRequest
         ),
         4 => array(
             'var' => 'originalMerchantOriginalId',
-            'isRequired' => true,
+            'isRequired' => false,
             'type' => TType::STRING,
         ),
         5 => array(
