@@ -41,6 +41,11 @@ class GetCategoryByOriginalCategoryRequest
             'isRequired' => false,
             'type' => TType::BOOL,
         ),
+        5 => array(
+            'var' => 'hasOriginalCategoryList',
+            'isRequired' => false,
+            'type' => TType::BOOL,
+        ),
     );
 
     /**
@@ -59,6 +64,10 @@ class GetCategoryByOriginalCategoryRequest
      * @var bool
      */
     public $hasBreadcrumbList = null;
+    /**
+     * @var bool
+     */
+    public $hasOriginalCategoryList = null;
 
     public function __construct($vals = null)
     {
@@ -74,6 +83,9 @@ class GetCategoryByOriginalCategoryRequest
             }
             if (isset($vals['hasBreadcrumbList'])) {
                 $this->hasBreadcrumbList = $vals['hasBreadcrumbList'];
+            }
+            if (isset($vals['hasOriginalCategoryList'])) {
+                $this->hasOriginalCategoryList = $vals['hasOriginalCategoryList'];
             }
         }
     }
@@ -125,6 +137,13 @@ class GetCategoryByOriginalCategoryRequest
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 5:
+                    if ($ftype == TType::BOOL) {
+                        $xfer += $input->readBool($this->hasOriginalCategoryList);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -157,6 +176,11 @@ class GetCategoryByOriginalCategoryRequest
         if ($this->hasBreadcrumbList !== null) {
             $xfer += $output->writeFieldBegin('hasBreadcrumbList', TType::BOOL, 4);
             $xfer += $output->writeBool($this->hasBreadcrumbList);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->hasOriginalCategoryList !== null) {
+            $xfer += $output->writeFieldBegin('hasOriginalCategoryList', TType::BOOL, 5);
+            $xfer += $output->writeBool($this->hasOriginalCategoryList);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

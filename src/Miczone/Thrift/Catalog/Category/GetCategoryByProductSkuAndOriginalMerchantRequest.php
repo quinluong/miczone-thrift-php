@@ -46,6 +46,11 @@ class GetCategoryByProductSkuAndOriginalMerchantRequest
             'isRequired' => false,
             'type' => TType::BOOL,
         ),
+        6 => array(
+            'var' => 'hasOriginalCategoryList',
+            'isRequired' => false,
+            'type' => TType::BOOL,
+        ),
     );
 
     /**
@@ -68,6 +73,10 @@ class GetCategoryByProductSkuAndOriginalMerchantRequest
      * @var bool
      */
     public $hasBreadcrumbList = null;
+    /**
+     * @var bool
+     */
+    public $hasOriginalCategoryList = null;
 
     public function __construct($vals = null)
     {
@@ -86,6 +95,9 @@ class GetCategoryByProductSkuAndOriginalMerchantRequest
             }
             if (isset($vals['hasBreadcrumbList'])) {
                 $this->hasBreadcrumbList = $vals['hasBreadcrumbList'];
+            }
+            if (isset($vals['hasOriginalCategoryList'])) {
+                $this->hasOriginalCategoryList = $vals['hasOriginalCategoryList'];
             }
         }
     }
@@ -144,6 +156,13 @@ class GetCategoryByProductSkuAndOriginalMerchantRequest
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 6:
+                    if ($ftype == TType::BOOL) {
+                        $xfer += $input->readBool($this->hasOriginalCategoryList);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -181,6 +200,11 @@ class GetCategoryByProductSkuAndOriginalMerchantRequest
         if ($this->hasBreadcrumbList !== null) {
             $xfer += $output->writeFieldBegin('hasBreadcrumbList', TType::BOOL, 5);
             $xfer += $output->writeBool($this->hasBreadcrumbList);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->hasOriginalCategoryList !== null) {
+            $xfer += $output->writeFieldBegin('hasOriginalCategoryList', TType::BOOL, 6);
+            $xfer += $output->writeBool($this->hasOriginalCategoryList);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();
